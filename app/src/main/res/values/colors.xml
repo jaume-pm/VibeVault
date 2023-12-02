@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="spotify_green">#FF1ED760</color>
+    <color name="spotify_dark_grey">#FF121212</color>
+    <color name="spotify_grey">#292929</color>
+    <color name="spotify_light_grey">#6d7575</color>
 </resources>

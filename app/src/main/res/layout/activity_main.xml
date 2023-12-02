@@ -9,23 +9,157 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_margin="25dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="15dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@xml/rounded_corners_grey"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="1">
 
             <EditText
-                android:id="@+id/editTextText"
-                android:layout_width="match_parent"
+                android:id="@+id/main_search_inp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:ems="2"
-                android:inputType="text"
-                android:text="Name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_weight="1"
+                android:backgroundTint="@color/spotify_light_grey"
+                android:hint="Buscador"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/spotify_light_grey"
+                android:textSize="14dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/main_search_btn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:background="@xml/rounded_corners_green"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/search_icon" />
+        </LinearLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="25dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginRight="32dp">
+
+            <ImageButton
+                android:id="@+id/main_songs_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/spotify_dark_grey"
+                android:paddingBottom="5dp"
+                android:src="@drawable/song_icon"
+                app:tint="@xml/bottom_bar_styles"/>
+
+            <TextView
+                android:id="@+id/main_songs_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Canciones"
+                android:textSize="10dp"
+                android:textColor="@color/spotify_light_grey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginRight="32dp">
+
+            <ImageButton
+                android:id="@+id/main_artists_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/spotify_dark_grey"
+                android:paddingBottom="5dp"
+                android:src="@drawable/artist_icon"
+                app:tint="@xml/bottom_bar_styles"/>
+
+            <TextView
+                android:id="@+id/main_artists_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Artistas"
+                android:textSize="10dp"
+                android:textColor="@color/spotify_light_grey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginRight="32dp">
+
+            <ImageButton
+                android:id="@+id/main_albums_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/spotify_dark_grey"
+                android:paddingBottom="5dp"
+                android:src="@drawable/album_icon"
+                app:tint="@xml/bottom_bar_styles"/>
+
+            <TextView
+                android:id="@+id/main_albums_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Albums"
+                android:textSize="10dp"
+                android:textColor="@color/spotify_light_grey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/main_fav_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/spotify_dark_grey"
+                android:paddingBottom="5dp"
+                android:src="@drawable/favorite_icon"
+                app:tint="@xml/bottom_bar_styles"/>
+
+            <TextView
+                android:id="@+id/main_fav_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favoritos"
+                android:textSize="10dp"
+                android:textColor="@color/spotify_light_grey"/>
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
