@@ -2,6 +2,9 @@ package com.example.vibevault;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -12,39 +15,58 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton searchBtn, songsBtn, albumsBtn, artistsBtn, favsBtn;
+    private ImageButton searchBtn;
 
-    private TextView songsTxt, albumsTxt, artistsTxt, favsTxt;
+    private ImageButton[] bottomBarBtn;
+
+    private TextView[] bottomBarTxt;
 
     private EditText searchInp;
+
+    private Fragment[] fragments;
+
+    private int selectedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fragments = new Fragment[4];
+        //fragments[0] = new SongsViewFragment();
+        //fragments[1] = new ExempleViewFragment();
         setContentView(R.layout.activity_main);
 
+        selectedFragment = DataHolder.getInstance().getSavedFragment();
+
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.replace(R.id.fragmentContainerView, fragments[selectedFragment]);
+        //fragmentTransaction.commit();
+
+        bottomBarBtn = new ImageButton[4];
+        bottomBarTxt = new TextView[4];
+
         searchBtn = (ImageButton) findViewById(R.id.main_search_btn);
-        songsBtn = (ImageButton) findViewById(R.id.main_songs_btn);
-        albumsBtn = (ImageButton) findViewById(R.id.main_albums_btn);
-        artistsBtn = (ImageButton) findViewById(R.id.main_artists_btn);
-        favsBtn = (ImageButton) findViewById(R.id.main_fav_btn);
+        bottomBarBtn[0] = (ImageButton) findViewById(R.id.main_songs_btn);
+        bottomBarBtn[1] = (ImageButton) findViewById(R.id.main_albums_btn);
+        bottomBarBtn[2] = (ImageButton) findViewById(R.id.main_artists_btn);
+        bottomBarBtn[3] = (ImageButton) findViewById(R.id.main_fav_btn);
 
         searchBtn.setOnClickListener(buttonAction);
-        songsBtn.setOnClickListener(buttonAction);
-        albumsBtn.setOnClickListener(buttonAction);
-        artistsBtn.setOnClickListener(buttonAction);
-        favsBtn.setOnClickListener(buttonAction);
+        bottomBarBtn[0].setOnClickListener(buttonAction);
+        bottomBarBtn[1].setOnClickListener(buttonAction);
+        bottomBarBtn[2].setOnClickListener(buttonAction);
+        bottomBarBtn[3].setOnClickListener(buttonAction);
 
-        songsTxt = (TextView) findViewById(R.id.main_songs_txt);
-        albumsTxt = (TextView) findViewById(R.id.main_albums_txt);
-        artistsTxt = (TextView) findViewById(R.id.main_artists_txt);
-        favsTxt = (TextView) findViewById(R.id.main_fav_txt);
+        bottomBarTxt[0] = (TextView) findViewById(R.id.main_songs_txt);
+        bottomBarTxt[1] = (TextView) findViewById(R.id.main_albums_txt);
+        bottomBarTxt[2] = (TextView) findViewById(R.id.main_artists_txt);
+        bottomBarTxt[3] = (TextView) findViewById(R.id.main_fav_txt);
 
-        songsBtn.setSelected(true);
-        songsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
+        searchInp = (EditText) findViewById(R.id.main_search_inp);
 
-        // Utilitzarem això per guardar el fragrment que estem utilitzant
-        // DataHolder.getInstance().getSavedFragment();
+        bottomBarBtn[selectedFragment].setSelected(true);
+        bottomBarTxt[selectedFragment].setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
+
     }
 
     protected View.OnClickListener buttonAction = new View.OnClickListener() {
@@ -52,44 +74,38 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             int id = v.getId();
             if(id == searchBtn.getId()){
-
-            } else if(id == songsBtn.getId()){
-                songsBtn.setSelected(true);
-                albumsBtn.setSelected(false);
-                artistsBtn.setSelected(false);
-                favsBtn.setSelected(false);
-                songsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
-                albumsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                artistsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                favsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-            } else if (id == albumsBtn.getId()) {
-                songsBtn.setSelected(false);
-                albumsBtn.setSelected(true);
-                artistsBtn.setSelected(false);
-                favsBtn.setSelected(false);
-                songsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                albumsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
-                artistsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                favsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-            } else if (id == artistsBtn.getId()) {
-                songsBtn.setSelected(false);
-                albumsBtn.setSelected(false);
-                artistsBtn.setSelected(true);
-                favsBtn.setSelected(false);
-                songsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                albumsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                artistsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
-                favsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
+                // Gestionar el click del boton buscar
+                // Se puede usar el selectedFragment para saber en que fragmento estamos
+            } else if(id == bottomBarBtn[0].getId()){
+                renderNewFragment (0);
+            } else if (id == bottomBarBtn[1].getId()) {
+                renderNewFragment (1);
+            } else if (id == bottomBarBtn[2].getId()) {
+                renderNewFragment (2);
             } else { // Boton de favoritos
-                songsBtn.setSelected(false);
-                albumsBtn.setSelected(false);
-                artistsBtn.setSelected(false);
-                favsBtn.setSelected(true);
-                songsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                albumsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                artistsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
-                favsTxt.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
+                renderNewFragment (3);
             }
         }
     };
+
+    void renderNewFragment (int newSelection){
+        // Utilitzarem això per guardar el fragrment en el que estem
+        DataHolder.getInstance().setSavedFragment(newSelection);
+        selectedFragment = newSelection;
+
+        for(int i = 0; i<fragments.length; i++){
+            if(i == newSelection){
+                bottomBarBtn[selectedFragment].setSelected(true);
+                bottomBarTxt[selectedFragment].setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
+            } else {
+                bottomBarBtn[selectedFragment].setSelected(false);
+                bottomBarTxt[selectedFragment].setTextColor(ContextCompat.getColor(MainActivity.this, R.color.spotify_light_grey));
+            }
+        }
+
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.replace(R.id.fragmentContainerView, fragments[selectedFragment]);
+        //fragmentTransaction.commit();
+    }
 }
