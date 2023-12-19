@@ -13,9 +13,12 @@
         android:theme="@style/Theme.VibeVault"
         tools:targetApi="31">
         <activity
+            android:name=".songs.ViewSoloSong"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

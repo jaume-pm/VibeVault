@@ -12,6 +12,8 @@ public class Song {
 
     private String songCover;
 
+    private String artistProfilePic;
+
     private class Album {
         public Images images;
 
@@ -93,5 +95,13 @@ public class Song {
 
     public void setSongCover(String songCover) {
         this.songCover = songCover;
+    }
+
+    public String getArtistProfilePic() {
+        return artistProfilePic;
+    }
+
+    public void setArtistProfilePic(String artistProfilePic) {
+        this.artistProfilePic = artistProfilePic;
     }
 }
