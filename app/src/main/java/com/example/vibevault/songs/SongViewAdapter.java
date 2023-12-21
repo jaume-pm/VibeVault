@@ -46,7 +46,7 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnRVItemClicked(v.getContext(), name);
+                listener.OnItemClicked(v.getContext(), name);
             }
         });
     }
