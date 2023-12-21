@@ -1,46 +1,101 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".songs.ViewSoloSong">
 
-    <!-- Utiliza una biblioteca como CircleImageView para la imagen del disco -->
+
     <ImageView
-        android:id="@+id/backgroundImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignTop="@+id/titleText"
-        android:layout_marginTop="0dp"
+        android:id="@+id/soloSongArtist_img"
+        android:layout_width="wrap_content"
+        android:layout_height="260dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/bad_bunny_concierto_problema_con_los_boletos" />
+        android:src="@tools:sample/avatars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bad_bunny_concierto_problema_con_los_boletos" />
+
+    <ImageView
+        android:id="@+id/soloBlackBaground_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@tools:sample/avatars"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/fondo_negro" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/vinylImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/soloSongAlbum_img"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginBottom="20dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/_6971477116771" />
+        android:src="@drawable/_6971477116771"
+        app:layout_constraintBottom_toBottomOf="@+id/soloSongArtist_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/soloSongName_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:layout_above="@id/vinylImage"
-        android:layout_centerHorizontal="true"/>
+        android:text="TextView"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="363dp" />
 
     <TextView
-        android:id="@+id/albumText"
+        android:id="@+id/soloSongArtist_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Album name"
-        android:layout_below="@id/vinylImage"
-        android:layout_centerHorizontal="true"/>
+        android:text="TextView"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="420dp" />
 
     <TextView
-        android:id="@+id/moreInfoText"
+        android:id="@+id/soloSongDuration_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="More info"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+        android:text="TextView"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="329dp" />
+
+    <TextView
+        android:id="@+id/soloSongAlbum_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="219dp"
+        tools:layout_editor_absoluteY="329dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/soloGoBack_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="25dp"
+            android:background="@xml/rounded_corners_green"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/search_icon" />
+
+        <ImageButton
+            android:id="@+id/soloAddFav_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@xml/rounded_corners_green"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/search_icon" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

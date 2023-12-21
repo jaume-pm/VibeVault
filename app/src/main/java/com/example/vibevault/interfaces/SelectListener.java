@@ -5,5 +5,8 @@ import android.content.Context;
 public interface SelectListener {
 
     // Alomejor en lugar del nombre hay que poner el id que proporciona spotify, o la url.
-    void OnRVItemClicked (Context context, String name);
+
+    void OnItemClicked(Context context, String id);
+
+    //void OnRVItemClicked (Context context, String name);
 }
