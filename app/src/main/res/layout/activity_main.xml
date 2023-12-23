@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
 
+    <!-- Barra de búsqueda -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="25dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="15dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@xml/rounded_corners_grey"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="1">
+        android:id="@+id/search_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@xml/rounded_corners_grey"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp">
 
             <EditText
                 android:id="@+id/main_search_inp"
@@ -44,30 +41,44 @@
                 android:background="@xml/rounded_corners_green"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/search_icon" />
-        </LinearLayout>
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
     </LinearLayout>
 
+<!-- FragmentContainerView -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+<!-- Barra de navegación inferior -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="25dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginRight="32dp"
             android:gravity="center"
-            android:layout_marginRight="32dp">
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/main_songs_btn"
@@ -76,23 +87,23 @@
                 android:backgroundTint="@color/spotify_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/song_icon"
-                app:tint="@xml/bottom_bar_styles"/>
+                app:tint="@xml/bottom_bar_styles" />
 
             <TextView
                 android:id="@+id/main_songs_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Canciones"
-                android:textSize="10dp"
-                android:textColor="@color/spotify_light_grey"/>
+                android:textColor="@color/spotify_light_grey"
+                android:textSize="10dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginRight="32dp"
             android:gravity="center"
-            android:layout_marginRight="32dp">
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/main_artists_btn"
@@ -101,23 +112,23 @@
                 android:backgroundTint="@color/spotify_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/artist_icon"
-                app:tint="@xml/bottom_bar_styles"/>
+                app:tint="@xml/bottom_bar_styles" />
 
             <TextView
                 android:id="@+id/main_artists_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Artistas"
-                android:textSize="10dp"
-                android:textColor="@color/spotify_light_grey"/>
+                android:textColor="@color/spotify_light_grey"
+                android:textSize="10dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginRight="32dp"
             android:gravity="center"
-            android:layout_marginRight="32dp">
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/main_albums_btn"
@@ -126,22 +137,22 @@
                 android:backgroundTint="@color/spotify_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/album_icon"
-                app:tint="@xml/bottom_bar_styles"/>
+                app:tint="@xml/bottom_bar_styles" />
 
             <TextView
                 android:id="@+id/main_albums_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Albums"
-                android:textSize="10dp"
-                android:textColor="@color/spotify_light_grey"/>
+                android:textColor="@color/spotify_light_grey"
+                android:textSize="10dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/main_fav_btn"
@@ -150,16 +161,17 @@
                 android:backgroundTint="@color/spotify_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/favorite_icon"
-                app:tint="@xml/bottom_bar_styles"/>
+                app:tint="@xml/bottom_bar_styles" />
 
             <TextView
                 android:id="@+id/main_fav_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Favoritos"
-                android:textSize="10dp"
-                android:textColor="@color/spotify_light_grey"/>
+                android:textColor="@color/spotify_light_grey"
+                android:textSize="10dp" />
         </LinearLayout>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

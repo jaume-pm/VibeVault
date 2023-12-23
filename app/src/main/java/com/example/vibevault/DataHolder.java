@@ -27,9 +27,9 @@ public class DataHolder {
     private int savedFragment;
     private Song holdedSong;
 
-    private List<Song> topSongsLoaded;
+    private List<Song> topSongs;
 
-    private List<Song> favSongsLoaded;
+    private List<Song> favSongs;
 
     private String access_token;
 
@@ -40,16 +40,10 @@ public class DataHolder {
 
     private DataHolder() {
         savedFragment = 0;
-        topSongsLoaded = new ArrayList<>();
-        favSongsLoaded = new ArrayList<>();
+        topSongs = new ArrayList<>();
+        favSongs= new ArrayList<>();
     }
 
-    public boolean setUpClientToken () {
-
-
-        if(access_token == "not set") return false;
-        return true;
-    }
     public static DataHolder getInstance() {
         return INSTANCE;
     }
@@ -70,20 +64,20 @@ public class DataHolder {
         this.holdedSong = holdedSong;
     }
 
-    public List<Song> getTopSongsLoaded() {
-        return topSongsLoaded;
+    public List<Song> getTopSongs() {
+        return topSongs;
     }
 
-    public void setTopSongsLoaded(List<Song> topSongsLoaded) {
-        this.topSongsLoaded = topSongsLoaded;
+    public void setTopSongs(List<Song> topSongsLoaded) {
+        this.topSongs = topSongsLoaded;
     }
 
-    public List<Song> getFavSongsLoaded() {
-        return favSongsLoaded;
+    public List<Song> getFavSongs() {
+        return favSongs;
     }
 
-    public void setFavSongsLoaded(List<Song> favSongsLoaded) {
-        this.favSongsLoaded = favSongsLoaded;
+    public void setFavSongs(List<Song> favSongsLoaded) {
+        this.favSongs = favSongsLoaded;
     }
 
     public String getAccess_token() {

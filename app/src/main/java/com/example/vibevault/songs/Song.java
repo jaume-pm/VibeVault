@@ -21,7 +21,7 @@ public class Song {
 
         public int width;
     }
-    private class Artists {
+    public class Artists { // Cuando se defina artists, hay que cambiar esto.
         public String name;
     }
 
@@ -65,7 +65,8 @@ public class Song {
         this.artists = artists;
     }
 
-    public Images getAlbumCover() {
-        return album.images.get(1);
+    public String getAlbumCover(int opt) {
+        return album.images.get(opt).url;
     }
+
 }

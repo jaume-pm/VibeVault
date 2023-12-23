@@ -95,7 +95,7 @@ public class SongViewFragment extends Fragment implements SelectListener {
                                         song_list.add(i.track);
                                     }
 
-                                    DataHolder.getInstance().setTopSongsLoaded(song_list);
+                                    DataHolder.getInstance().setTopSongs(song_list);
                                     setUpAdapter(context);
                                 }
                             }
@@ -124,7 +124,7 @@ public class SongViewFragment extends Fragment implements SelectListener {
         song_list = new ArrayList<>();
         results = new ArrayList<>();
 
-        if(!DataHolder.getInstance().getTopSongsLoaded().isEmpty()) song_list = DataHolder.getInstance().getTopSongsLoaded();
+        if(!DataHolder.getInstance().getTopSongs().isEmpty()) song_list = DataHolder.getInstance().getTopSongs();
     }
 
     @Override

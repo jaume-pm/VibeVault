@@ -39,8 +39,12 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
         final String name = songList.get(position).getName();
 
         holder.name.setText(songList.get(position).getName().substring(0, 1).toUpperCase() + songList.get(position).getName().substring(1));
-        holder.artists.setText("Artists: " + songList.get(position).getArtists().get(0));
-        Glide.with(context).load(songList.get(position).getAlbumCover()).into(holder.songImg);
+        String aux = "";
+        for(Song.Artists a : songList.get(position).getArtists()) {
+            aux = aux + a.name + ", ";
+        }
+        holder.artists.setText(aux.substring(0, aux.length() - 2));
+        Glide.with(context).load(songList.get(position).getAlbumCover(2)).into(holder.songImg);
         //holder.like.setBackground();
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
