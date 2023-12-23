@@ -42,40 +42,13 @@ public class DataHolder {
         savedFragment = 0;
         topSongsLoaded = new ArrayList<>();
         favSongsLoaded = new ArrayList<>();
+    }
 
-        String clientId = "683fff68e09f4b97a5ded29474b883e2";
-        String clientSecret = "a0ab2c15aa684a7287a993468c13ce17";
+    public boolean setUpClientToken () {
 
-        String authHeader = "Basic " + Base64.encodeToString((clientId + ":" + clientSecret).getBytes(), Base64.NO_WRAP);
-        String grantType = "client_credentials";
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(("https://accounts.spotify.com/"))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        SpotifyAPIService service = retrofit.create(SpotifyAPIService.class);
-        Call<ApiTokenResponse> call = service.getToken(grantType, authHeader);
-
-        call.enqueue(new Callback<ApiTokenResponse>() {
-            @Override
-            public void onResponse(Call<ApiTokenResponse> call, retrofit2.Response<ApiTokenResponse> response) {
-                if (response.isSuccessful()) {
-                    ApiTokenResponse tokenResponse = response.body();
-                    access_token = tokenResponse.getAccess_token();
-                    token_type = tokenResponse.getToken_type();
-                    // expires_in = tokenResponse.getExpires_in();
-                } else {
-                    Log.e("API_ERROR", "Llamada para obtener token fallida (DataHolder/else)");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiTokenResponse> call, Throwable t) {
-                Log.e("API_ERROR", "Llamada para obtener token fallida (DataHolder/onFailure) " + t);
-            }
-        });
-
+        if(access_token == "not set") return false;
+        return true;
     }
     public static DataHolder getInstance() {
         return INSTANCE;
@@ -111,5 +84,21 @@ public class DataHolder {
 
     public void setFavSongsLoaded(List<Song> favSongsLoaded) {
         this.favSongsLoaded = favSongsLoaded;
+    }
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
+
+    public String getToken_type() {
+        return token_type;
+    }
+
+    public void setToken_type(String token_type) {
+        this.token_type = token_type;
     }
 }

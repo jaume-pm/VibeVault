@@ -3,6 +3,8 @@ package com.example.vibevault.songs;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +17,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vibevault.APIServices.ApiResponse;
+import com.example.vibevault.APIServices.ApiTokenResponse;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SelectListener;
 import com.example.vibevault.interfaces.SpotifyAPIService;
+import com.example.vibevault.interfaces.SpotifyAPIToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,43 +50,72 @@ public class SongViewFragment extends Fragment implements SelectListener {
         recyclerView = view.findViewById(R.id.songsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
-        /*
+
         if(song_list.isEmpty()) {
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://api.spotify.com/v1/")
+            String clientId = "683fff68e09f4b97a5ded29474b883e2";
+            String clientSecret = "a0ab2c15aa684a7287a993468c13ce17";
+
+            String authHeader = "Basic " + Base64.encodeToString((clientId + ":" + clientSecret).getBytes(), Base64.NO_WRAP);
+            String grantType = "client_credentials";
+
+            Retrofit retrofitToken = new Retrofit.Builder()
+                    .baseUrl("https://accounts.spotify.com/")
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(DataHolder.getInstance().getOkHttpClient())
                     .build();
 
-            SpotifyAPIService spotifyAPIService = retrofit.create(SpotifyAPIService.class);
+            Retrofit retrofitAPI = new Retrofit.Builder()
+                    .baseUrl("https://api.spotify.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
 
-            spotifyAPIService.getAllGlobalSongs().enqueue(new Callback<ApiResponse>() {
+            SpotifyAPIToken spotifyAPIToken = retrofitToken.create(SpotifyAPIToken.class);
+
+            SpotifyAPIService spotifyAPIServiceSongs = retrofitAPI.create(SpotifyAPIService.class);
+
+            Call<ApiTokenResponse> call = spotifyAPIToken.getToken(grantType, authHeader);
+            call.enqueue(new Callback<ApiTokenResponse>() {
                 @Override
-                public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        results = response.body().getAllSongsResult();
-                        for (Song s : results) {
-                            if (response.isSuccessful() && response.body() != null) {
-                                song_list.add(s);
-                                if (song_list.size() == results.size()) { // Verifica si todos los detalles han sido agregados.
-                                    // Actualiza el adaptador en el hilo de UI
-                                    //poke_list.sort(Comparator.comparingInt(Pokemon::getID));
+                public void onResponse(Call<ApiTokenResponse> call, retrofit2.Response<ApiTokenResponse> response) {
+                    if (response.isSuccessful()) {
+                        ApiTokenResponse tokenResponse = response.body();
+                        DataHolder.getInstance().setAccess_token(tokenResponse.getAccess_token());
+                        DataHolder.getInstance().setToken_type(tokenResponse.getToken_type());
+
+                        // Realiza la llamada a la API de Spotify para obtener las canciones
+                        String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
+                        Call<ApiResponse> callSongs = spotifyAPIServiceSongs.getAllGlobalSongs(authToken);
+                        callSongs.enqueue(new Callback<ApiResponse>() {
+                            @Override
+                            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                                if (response.isSuccessful() && response.body() != null) {
+                                    List<ApiResponse.ItemsSong> itemsSong = response.body().getTracks();
+
+                                    for (ApiResponse.ItemsSong i : itemsSong) {
+                                        song_list.add(i.track);
+                                    }
+
                                     DataHolder.getInstance().setTopSongsLoaded(song_list);
                                     setUpAdapter(context);
                                 }
                             }
-                        }
+
+                            @Override
+                            public void onFailure(Call<ApiResponse> call, Throwable throwable) {
+                                // Manejar error
+                            }
+                        });
+                    } else {
+                        Log.e("API_ERROR", "Llamada para obtener token fallida (DataHolder/tokenCall/else)");
                     }
                 }
+
                 @Override
-                public void onFailure(Call<ApiResponse> call, Throwable throwable) {
-                    Toast.makeText(context, "Error al obtener la lista de Pokémon", Toast.LENGTH_SHORT).show();
-                    //Log.e("PokemonViewFragment", "Error al obtener la lista de Pokémon", throwable);
+                public void onFailure(Call<ApiTokenResponse> call, Throwable t) {
+                    Log.e("API_ERROR", "Llamada para obtener token fallida (DataHolder/onFailure) " + t);
                 }
             });
         } else setUpAdapter(view.getContext());
-        */
     }
 
     @Override

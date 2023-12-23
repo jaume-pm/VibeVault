@@ -1,24 +1,17 @@
 package com.example.vibevault.songs;
 
+import java.util.List;
+
 public class Song {
 
-    private String spotySongID, name, albumName, artistsName;
-
-    private int songLenght;
-
+    private String id;
+    private String name;
+    private int duration_ms;
     private Album album;
-
-    private Artists artists;
-
-    private String songCover;
-
-    private String artistProfilePic;
-
+    private List<Artists> artists;
     private class Album {
-        public Images images;
-
         public String name;
-        public String id;
+        public List<Images> images;
     }
 
     private class Images {
@@ -30,15 +23,14 @@ public class Song {
     }
     private class Artists {
         public String name;
-        public String url;
     }
 
-    public String getSpotySongID() {
-        return spotySongID;
+    public String getId() {
+        return id;
     }
 
-    public void setSpotySongID(String spotySongID) {
-        this.spotySongID = spotySongID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,28 +41,12 @@ public class Song {
         this.name = name;
     }
 
-    public String getAlbumName() {
-        return albumName;
+    public int getDuration_ms() {
+        return duration_ms;
     }
 
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
-    public String getArtistsName() {
-        return artistsName;
-    }
-
-    public void setArtistsName(String artistsName) {
-        this.artistsName = artistsName;
-    }
-
-    public int getSongLenght() {
-        return songLenght;
-    }
-
-    public void setSongLenght(int songLenght) {
-        this.songLenght = songLenght;
+    public void setDuration_ms(int duration_ms) {
+        this.duration_ms = duration_ms;
     }
 
     public Album getAlbum() {
@@ -81,27 +57,15 @@ public class Song {
         this.album = album;
     }
 
-    public Artists getArtists() {
+    public List<Artists> getArtists() {
         return artists;
     }
 
-    public void setArtists(Artists artists) {
+    public void setArtists(List<Artists> artists) {
         this.artists = artists;
     }
 
-    public String getSongCover() {
-        return songCover;
-    }
-
-    public void setSongCover(String songCover) {
-        this.songCover = songCover;
-    }
-
-    public String getArtistProfilePic() {
-        return artistProfilePic;
-    }
-
-    public void setArtistProfilePic(String artistProfilePic) {
-        this.artistProfilePic = artistProfilePic;
+    public Images getAlbumCover() {
+        return album.images.get(1);
     }
 }
