@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.vibevault.songs.SongViewFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton searchBtn;
@@ -31,16 +33,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragments = new Fragment[4];
-        //fragments[0] = new SongsViewFragment();
+        fragments[0] = new SongViewFragment();
         //fragments[1] = new ExempleViewFragment();
         setContentView(R.layout.activity_main);
 
         selectedFragment = DataHolder.getInstance().getSavedFragment();
 
-        //FragmentManager fragmentManager = getSupportFragmentManager();
-        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.replace(R.id.fragmentContainerView, fragments[selectedFragment]);
-        //fragmentTransaction.commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragments[selectedFragment]);
+        fragmentTransaction.commit();
 
         bottomBarBtn = new ImageButton[4];
         bottomBarTxt = new TextView[4];

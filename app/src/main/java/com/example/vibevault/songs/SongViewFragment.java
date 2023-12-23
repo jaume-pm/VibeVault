@@ -14,12 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vibevault.APIServices.ApiResponse;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SelectListener;
+import com.example.vibevault.interfaces.SpotifyAPIService;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,7 +34,7 @@ public class SongViewFragment extends Fragment implements SelectListener {
 
     private List<Song> song_list;
 
-    // private List<Results> results;
+    private List<Song> results;
 
     public SongViewFragment() {
         // Required empty public constructor
@@ -45,13 +46,50 @@ public class SongViewFragment extends Fragment implements SelectListener {
         recyclerView = view.findViewById(R.id.songsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
+        /*
+        if(song_list.isEmpty()) {
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://api.spotify.com/v1/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(DataHolder.getInstance().getOkHttpClient())
+                    .build();
+
+            SpotifyAPIService spotifyAPIService = retrofit.create(SpotifyAPIService.class);
+
+            spotifyAPIService.getAllGlobalSongs().enqueue(new Callback<ApiResponse>() {
+                @Override
+                public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        results = response.body().getAllSongsResult();
+                        for (Song s : results) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                song_list.add(s);
+                                if (song_list.size() == results.size()) { // Verifica si todos los detalles han sido agregados.
+                                    // Actualiza el adaptador en el hilo de UI
+                                    //poke_list.sort(Comparator.comparingInt(Pokemon::getID));
+                                    DataHolder.getInstance().setTopSongsLoaded(song_list);
+                                    setUpAdapter(context);
+                                }
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onFailure(Call<ApiResponse> call, Throwable throwable) {
+                    Toast.makeText(context, "Error al obtener la lista de Pokémon", Toast.LENGTH_SHORT).show();
+                    //Log.e("PokemonViewFragment", "Error al obtener la lista de Pokémon", throwable);
+                }
+            });
+        } else setUpAdapter(view.getContext());
+        */
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         song_list = new ArrayList<>();
-        // results = new ArrayList<>();
+        results = new ArrayList<>();
 
         if(!DataHolder.getInstance().getTopSongsLoaded().isEmpty()) song_list = DataHolder.getInstance().getTopSongsLoaded();
     }
