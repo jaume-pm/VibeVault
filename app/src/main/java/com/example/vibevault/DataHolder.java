@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.example.vibevault.APIServices.ApiTokenResponse;
 import com.example.vibevault.interfaces.SpotifyAPIService;
 import com.example.vibevault.songs.Song;
+import com.example.vibevault.albums.Album;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class DataHolder {
     private Song holdedSong;
 
     private List<Song> topSongs;
+
+    private List<Album> topAlbums;
 
     private List<Song> favSongs;
 
@@ -94,5 +97,13 @@ public class DataHolder {
 
     public void setToken_type(String token_type) {
         this.token_type = token_type;
+    }
+
+    public List<Album> getTopAlbums() {
+        return topAlbums;
+    }
+
+    public void setTopAlbums(List<Album> topAlbums) {
+        this.topAlbums = topAlbums;
     }
 }
