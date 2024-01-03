@@ -1,6 +1,6 @@
 package com.example.vibevault.interfaces;
 
-import com.example.vibevault.APIServices.ApiTokenResponse;
+import com.example.vibevault.APIServicesToken.ApiTokenResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

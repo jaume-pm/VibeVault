@@ -1,14 +1,14 @@
-package com.example.vibevault.APIServices;
+package com.example.vibevault.songs.api;
 
 import com.example.vibevault.songs.Song;
 
 import java.util.List;
 
-public class ApiResponse {
+public class ApiResponseGetSongs {
     private List<ItemsSong> items;
 
     // Constructor, getters y setters
-    public ApiResponse() {
+    public ApiResponseGetSongs() {
     }
 
     public class ItemsSong {

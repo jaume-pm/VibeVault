@@ -1,5 +1,7 @@
 package com.example.vibevault.songs;
 
+import com.example.vibevault.albums.Album;
+
 import java.util.List;
 
 public class Song {
@@ -9,18 +11,7 @@ public class Song {
     private int duration_ms;
     private Album album;
     private List<Artists> artists;
-    private class Album {
-        public String name;
-        public List<Images> images;
-    }
 
-    private class Images {
-        public String url;
-
-        public int height;
-
-        public int width;
-    }
     public class Artists { // Cuando se defina artists, hay que cambiar esto.
         public String name;
     }
@@ -66,7 +57,7 @@ public class Song {
     }
 
     public String getAlbumCover(int opt) {
-        return album.images.get(opt).url;
+        return album.getImage(opt);
     }
 
 }

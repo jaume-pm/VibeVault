@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vibevault.APIServices.ApiResponse;
-import com.example.vibevault.APIServices.ApiTokenResponse;
+import com.example.vibevault.songs.api.ApiResponseGetSongs;
+import com.example.vibevault.APIServicesToken.ApiTokenResponse;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SelectListener;
@@ -84,14 +83,14 @@ public class SongViewFragment extends Fragment implements SelectListener {
 
                         // Realiza la llamada a la API de Spotify para obtener las canciones
                         String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
-                        Call<ApiResponse> callSongs = spotifyAPIServiceSongs.getAllGlobalSongs(authToken);
-                        callSongs.enqueue(new Callback<ApiResponse>() {
+                        Call<ApiResponseGetSongs> callSongs = spotifyAPIServiceSongs.getAllGlobalSongs(authToken);
+                        callSongs.enqueue(new Callback<ApiResponseGetSongs>() {
                             @Override
-                            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                            public void onResponse(Call<ApiResponseGetSongs> call, Response<ApiResponseGetSongs> response) {
                                 if (response.isSuccessful() && response.body() != null) {
-                                    List<ApiResponse.ItemsSong> itemsSong = response.body().getTracks();
+                                    ApiResponseGetSongs apiResponseGetSongs = response.body();
 
-                                    for (ApiResponse.ItemsSong i : itemsSong) {
+                                    for (ApiResponseGetSongs.ItemsSong i : apiResponseGetSongs.getTracks()) {
                                         song_list.add(i.track);
                                     }
 
@@ -101,7 +100,7 @@ public class SongViewFragment extends Fragment implements SelectListener {
                             }
 
                             @Override
-                            public void onFailure(Call<ApiResponse> call, Throwable throwable) {
+                            public void onFailure(Call<ApiResponseGetSongs> call, Throwable throwable) {
                                 // Manejar error
                             }
                         });
@@ -135,10 +134,10 @@ public class SongViewFragment extends Fragment implements SelectListener {
     }
 
     @Override
-    public void OnItemClicked(Context context, String id) {
+    public void OnItemClicked(Context context, String name) {
         DataHolder.getInstance().setSavedFragment(0);
-        Intent intent = new Intent(context, ViewSoloSong.class);
-        intent.putExtra("ID", id);
+        Intent intent = new Intent(context, SongViewSolo.class);
+        intent.putExtra("NAME", name);
         context.startActivity(intent);
     }
 

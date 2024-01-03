@@ -1,8 +1,4 @@
-package com.example.vibevault.APIServices;
-
-import com.example.vibevault.songs.Song;
-
-import java.util.List;
+package com.example.vibevault.APIServicesToken;
 
 public class ApiTokenResponse {
     private String access_token;

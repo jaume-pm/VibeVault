@@ -25,12 +25,12 @@ tools:context=".MainActivity">
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/spotify_light_grey"
+                android:backgroundTint="@color/vibeVault_light_grey"
                 android:hint="Buscador"
                 android:inputType="textPersonName"
                 android:maxLength="50"
                 android:textColor="#FFFFFF"
-                android:textColorHint="@color/spotify_light_grey"
+                android:textColorHint="@color/vibeVault_light_grey"
                 android:textSize="14dp" />
 
             <ImageButton
@@ -84,7 +84,7 @@ tools:context=".MainActivity">
                 android:id="@+id/main_songs_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/spotify_dark_grey"
+                android:backgroundTint="@color/vibeVault_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/song_icon"
                 app:tint="@xml/bottom_bar_styles" />
@@ -94,7 +94,7 @@ tools:context=".MainActivity">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Canciones"
-                android:textColor="@color/spotify_light_grey"
+                android:textColor="@color/vibeVault_light_grey"
                 android:textSize="10dp" />
         </LinearLayout>
 
@@ -109,7 +109,7 @@ tools:context=".MainActivity">
                 android:id="@+id/main_artists_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/spotify_dark_grey"
+                android:backgroundTint="@color/vibeVault_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/artist_icon"
                 app:tint="@xml/bottom_bar_styles" />
@@ -119,7 +119,7 @@ tools:context=".MainActivity">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Artistas"
-                android:textColor="@color/spotify_light_grey"
+                android:textColor="@color/vibeVault_light_grey"
                 android:textSize="10dp" />
         </LinearLayout>
 
@@ -134,7 +134,7 @@ tools:context=".MainActivity">
                 android:id="@+id/main_albums_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/spotify_dark_grey"
+                android:backgroundTint="@color/vibeVault_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/album_icon"
                 app:tint="@xml/bottom_bar_styles" />
@@ -144,7 +144,7 @@ tools:context=".MainActivity">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Albums"
-                android:textColor="@color/spotify_light_grey"
+                android:textColor="@color/vibeVault_light_grey"
                 android:textSize="10dp" />
         </LinearLayout>
 
@@ -158,7 +158,7 @@ tools:context=".MainActivity">
                 android:id="@+id/main_fav_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/spotify_dark_grey"
+                android:backgroundTint="@color/vibeVault_dark_grey"
                 android:paddingBottom="5dp"
                 android:src="@drawable/favorite_icon"
                 app:tint="@xml/bottom_bar_styles" />
@@ -168,7 +168,7 @@ tools:context=".MainActivity">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Favoritos"
-                android:textColor="@color/spotify_light_grey"
+                android:textColor="@color/vibeVault_light_grey"
                 android:textSize="10dp" />
         </LinearLayout>
 

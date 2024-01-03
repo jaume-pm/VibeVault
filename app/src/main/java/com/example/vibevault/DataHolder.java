@@ -1,26 +1,10 @@
 package com.example.vibevault;
 
-import android.util.Base64;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.example.vibevault.APIServices.ApiTokenResponse;
-import com.example.vibevault.interfaces.SpotifyAPIService;
 import com.example.vibevault.songs.Song;
 import com.example.vibevault.albums.Album;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class DataHolder {

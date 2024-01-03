@@ -3,9 +3,9 @@
     <style name="Base.Theme.VibeVault" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/spotify_dark_grey</item>
-        <item name="android:windowBackground">@color/spotify_dark_grey</item>
-        <item name="android:navigationBarColor">@color/spotify_dark_grey</item>
+        <item name="colorPrimary">@color/vibeVault_dark_grey</item>
+        <item name="android:windowBackground">@color/vibeVault_dark_grey</item>
+        <item name="android:navigationBarColor">@color/vibeVault_dark_grey</item>
     </style>
 
     <style name="Theme.VibeVault" parent="Base.Theme.VibeVault" />

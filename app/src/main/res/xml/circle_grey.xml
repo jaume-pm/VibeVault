@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/vibeVault_ripple_grey">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/vibeVault_grey"/> <!-- Color de fondo rojo -->
+            <corners android:radius="50dp"/> <!-- Tamaño del radio para redondear las esquinas -->
+        </shape>
+    </item>
+</ripple>

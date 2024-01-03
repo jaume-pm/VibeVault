@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/spotify_dark_green">
+    android:color="@color/vibeVault_dark_blue">
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid android:color="@color/spotify_green"/> <!-- Color de fondo rojo -->
+            <solid android:color="@color/vibeVault_blue"/> <!-- Color de fondo rojo -->
             <corners android:radius="8dp"/> <!-- Tamaño del radio para redondear las esquinas -->
         </shape>
     </item>

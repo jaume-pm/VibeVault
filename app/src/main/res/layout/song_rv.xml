@@ -5,7 +5,7 @@
         android:id="@+id/song_main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/spotify_dark_grey">
+        android:backgroundTint="@color/vibeVault_dark_grey">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:textColor="@color/spotify_light_grey"
+                    android:textColor="@color/vibeVault_light_grey"
                     android:text="Singers"
                     android:textSize="10sp" />
 
@@ -64,7 +64,7 @@
             android:layout_height="25dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/favorite_icon"
-            android:backgroundTint="@color/spotify_light_grey"/>
+            android:backgroundTint="@color/vibeVault_light_grey"/>
 
     </LinearLayout>
 

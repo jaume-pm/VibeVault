@@ -13,6 +13,8 @@ public class Album {
 
     private List<Song> songs;
 
+    private List<Images> images;
+
     public String getId() {
         return id;
     }
@@ -51,6 +53,18 @@ public class Album {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Images> images) {
+        this.images = images;
+    }
+
+    public String getImage(int i) {
+        return images.get(i).url;
     }
 
     private class Images {
