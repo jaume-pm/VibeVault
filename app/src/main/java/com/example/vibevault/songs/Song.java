@@ -12,6 +12,8 @@ public class Song {
     private Album album;
     private List<Artists> artists;
 
+    private int popularity;
+
     public class Artists { // Cuando se defina artists, hay que cambiar esto.
         public String name;
     }
@@ -60,4 +62,11 @@ public class Song {
         return album.getImage(opt);
     }
 
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
 }

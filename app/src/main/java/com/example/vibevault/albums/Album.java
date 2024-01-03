@@ -15,6 +15,8 @@ public class Album {
 
     private List<Images> images;
 
+    private String release_date;
+
     public String getId() {
         return id;
     }
@@ -65,6 +67,14 @@ public class Album {
 
     public String getImage(int i) {
         return images.get(i).url;
+    }
+
+    public String getRelease_date() {
+        return release_date;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
     private class Images {
