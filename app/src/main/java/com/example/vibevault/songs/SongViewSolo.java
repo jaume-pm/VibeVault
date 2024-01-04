@@ -1,20 +1,31 @@
 package com.example.vibevault.songs;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.graphics.drawable.Drawable;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.vibevault.artists.Artist;
 import com.example.vibevault.songs.api.ApiResponseGetSongs;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SpotifyAPIService;
 import com.example.vibevault.songs.api.ApiResponseSearchSong;
 import com.example.vibevault.utilities.ImageBlur;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +40,11 @@ public class SongViewSolo extends AppCompatActivity {
     private TextView name, albumTxt, artistsTxt, duration, date, popularity;
 
     private ImageView albumCover, artistsImg;
+
+    private ImageButton back, addFav, play;
+
+    private MediaPlayer mediaPlayer;
+    private boolean isPlaying = false, isPLayable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +68,22 @@ public class SongViewSolo extends AppCompatActivity {
             albumCover = findViewById(R.id.soloSongAlbum_img);
             artistsImg = findViewById(R.id.soloSongArtist_img);
 
+            back = findViewById(R.id.soloSongGoBack_btn);
+            addFav = findViewById(R.id.soloSongAddFav_btn);
+            play = findViewById(R.id.soloSongPlay_btn);
+
+            back.setOnClickListener(buttonAction);
+            addFav.setOnClickListener(buttonAction);
+            play.setOnClickListener(buttonAction);
+
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setAudioAttributes(
+                    new AudioAttributes.Builder()
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .build()
+            );
+
             Retrofit retrofitAPI = new Retrofit.Builder()
                     .baseUrl("https://api.spotify.com/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -63,7 +95,7 @@ public class SongViewSolo extends AppCompatActivity {
             String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
 
             NAME = NAME.replace(" ", "+");
-            spotifyAPIServiceSongs.getSong(NAME, "track", 1, 0, authToken).enqueue(new Callback<ApiResponseSearchSong>() {
+            spotifyAPIServiceSongs.getSong(NAME, "track", 1, 0, "audio", authToken).enqueue(new Callback<ApiResponseSearchSong>() {
                 @Override
                 public void onResponse(Call<ApiResponseSearchSong> call, Response<ApiResponseSearchSong> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -76,15 +108,38 @@ public class SongViewSolo extends AppCompatActivity {
                         date.setText(song.getAlbum().getRelease_date());
                         String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + String.valueOf(song.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
                         popularity.setText(Html.fromHtml(popuString));
-                        /*
-                        String aux = song.getArtists().get(0).name;
+
+                        String aux = song.getArtists().get(0).getName();
                         for(int i = 1; i < song.getArtists().size(); i++){
-                            aux = aux + ", " + song.getArtists().get(i).name;
+                            aux = aux + ", " + song.getArtists().get(i).getName();
                         }
-                        */
+                        artistsTxt.setText(aux);
+
                         duration.setText(convertMillisToMinSec(song.getDuration_ms()));
                         // Falta fer el mateix d'album, pero amb artists
 
+                        try {
+                            Log.d("URL", song.getPreview_url());
+                            mediaPlayer.setDataSource(song.getPreview_url()); // URL
+                            mediaPlayer.prepareAsync();
+                            isPLayable = true;
+
+                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                @Override
+                                public void onPrepared(MediaPlayer mp) {
+                                    // El MediaPlayer está listo, pero no iniciamos la reproducción aquí
+                                }
+                            });
+                            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+                                    isPlaying = false;
+                                    play.setImageResource(R.drawable.play_icon); // Restableix el botó
+                                }
+                            });
+                        } catch (IOException e) {
+                            isPLayable = false;
+                        }
                     }
                 }
 
@@ -94,6 +149,49 @@ public class SongViewSolo extends AppCompatActivity {
                     finish(); // Cierra esta activity y regresa a MainActivity
                 }
             });
+        }
+    }
+
+    View.OnClickListener buttonAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            if(id == back.getId()) finish();
+            else if(id == addFav.getId()){
+                if(song.isFavourite()){
+                    song.setFavourite(false);
+                    addFav.setImageResource(R.drawable.favorite_icon);
+                } else{
+                    song.setFavourite(true);
+                    addFav.setImageResource(R.drawable.filledheart_icon);
+                }
+
+                //Toast.makeText(SongViewSolo.this, "Añadido a favoritos", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                if(isPLayable){
+                    if (!isPlaying) {
+                        mediaPlayer.start();
+                        isPlaying = true;
+                        play.setImageResource(R.drawable.pause_icon);
+                    } else{
+                        mediaPlayer.pause();
+                        isPlaying = false;
+                        play.setImageResource(R.drawable.play_icon);
+                    }
+                }
+            }
+        }
+    };
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 

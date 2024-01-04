@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.vibevault.R;
+import com.example.vibevault.artists.Artist;
 import com.example.vibevault.interfaces.SelectListener;
 
 import java.util.List;
@@ -40,8 +41,8 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
 
         holder.name.setText(songList.get(position).getName().substring(0, 1).toUpperCase() + songList.get(position).getName().substring(1));
         String aux = "";
-        for(Song.Artists a : songList.get(position).getArtists()) {
-            aux = aux + a.name + ", ";
+        for(Artist a : songList.get(position).getArtists()) {
+            aux = aux + a.getName() + ", ";
         }
         holder.artists.setText(aux.substring(0, aux.length() - 2));
         Glide.with(context).load(songList.get(position).getAlbumCover(2)).into(holder.songImg);

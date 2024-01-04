@@ -6,15 +6,17 @@ public class Artist {
     private String id;
     private String name;
     private int popularity;
-    private ArrayList<String> genres;
+    private ArrayList<String> genres; // ?
+    private Images images;
+    private Followers followers;
+
     private boolean isFavourite = false;
-    private Followers followers = new Followers();
 
     private class Followers {
         public String href;
         public int total;
     }
-    private Images images;
+
     private class Images {
         public String url;
 

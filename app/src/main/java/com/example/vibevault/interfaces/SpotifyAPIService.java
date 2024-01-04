@@ -24,6 +24,7 @@ public interface SpotifyAPIService {
             @Query("type") String type,
             @Query("limit") int limit,
             @Query("offset") int offset,
+            @Query("include_external") String includeExternal,
             @Header("Authorization") String authToken
     );
     // END SONGS //////////////////////////////////////////////////////////////////

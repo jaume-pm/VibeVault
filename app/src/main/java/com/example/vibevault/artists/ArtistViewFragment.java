@@ -89,7 +89,7 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
                                     ApiResponseGetSongs apiResponseGetSongs = response.body();
 
                                     for (ApiResponseGetSongs.ItemsSong i : apiResponseGetSongs.getTracks()) {
-                                        artist_list.add(i.track.getArtist());
+                                        //artist_list.add(i.track.getArtist());
                                     }
 
                                     DataHolder.getInstance().setTopArtists(artist_list);

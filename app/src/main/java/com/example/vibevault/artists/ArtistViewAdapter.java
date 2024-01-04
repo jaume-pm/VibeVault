@@ -38,7 +38,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         final String artistName = artistList.get(position).getName();
 
         holder.artistName.setText(artistList.get(position).getName().substring(0, 1).toUpperCase() + artistList.get(position).getName().substring(1));
-        holder.artistFollowers.setText(String.format(Locale.getDefault(), "%,d Followers", Artist.getFollowers().getTotal()));
+        //holder.artistFollowers.setText(String.format(Locale.getDefault(), "%,d Followers", Artist.getFollowers().getTotal()));
 
         holder.artistCardview.setOnClickListener(new View.OnClickListener() {
             @Override
