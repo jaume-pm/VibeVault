@@ -39,7 +39,7 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
         final String name = songList.get(position).getName();
 
-        holder.name.setText(songList.get(position).getName().substring(0, 1).toUpperCase() + songList.get(position).getName().substring(1));
+        holder.name.setText(name);
         String aux = "";
         for(Artist a : songList.get(position).getArtists()) {
             aux = aux + a.getName() + ", ";

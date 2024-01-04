@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vibevault.albums.Album;
+import com.example.vibevault.artists.Artist;
 import com.example.vibevault.songs.api.ApiResponseGetSongs;
 import com.example.vibevault.APIServicesToken.ApiTokenResponse;
 import com.example.vibevault.DataHolder;
