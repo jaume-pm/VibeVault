@@ -11,7 +11,7 @@ public class Album {
     private int total_tracks;
     private List<Artist> artists;
 
-    private List<Song> songs;
+   // private List<Song> songs;
 
     private List<Images> images;
 
@@ -33,10 +33,6 @@ public class Album {
         return artists;
     }
 
-    public List<Song> getSongs() {
-        return songs;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -53,9 +49,6 @@ public class Album {
         this.artists = artists;
     }
 
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
-    }
 
     public List<Images> getImages() {
         return images;
@@ -88,4 +81,13 @@ public class Album {
     public class Artist { // Cuando se defina artists, hay que cambiar esto.
         public String name;
     }
+
+    /*
+        public List<Song> getSongs() {
+        return songs;
+    }
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+     */
 }

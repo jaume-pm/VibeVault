@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.vibevault.albums.AlbumViewFragment;
 import com.example.vibevault.albums.AlbumViewSolo;
 import com.example.vibevault.songs.SongViewFragment;
 import com.example.vibevault.songs.SongViewSolo;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         fragments = new Fragment[4];
         fragments[0] = new SongViewFragment();
-        fragments[1] = new SongViewFragment();
+        fragments[1] = new AlbumViewFragment();
         fragments[2] = new SongViewFragment();
         fragments[3] = new SongViewFragment();
         //fragments[1] = new ExempleViewFragment();

@@ -29,6 +29,7 @@ public class DataHolder {
         savedFragment = 0;
         topSongs = new ArrayList<>();
         favSongs= new ArrayList<>();
+        topAlbums = new ArrayList<>();
     }
 
     public static DataHolder getInstance() {

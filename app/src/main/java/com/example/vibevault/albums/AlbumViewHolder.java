@@ -26,6 +26,6 @@ public class AlbumViewHolder extends RecyclerView.ViewHolder {
         this.name = itemView.findViewById(R.id.song_name);
         this.artists = itemView.findViewById(R.id.song_singers);
         this.like = itemView.findViewById(R.id.song_like_btn);
-        this.cardView = itemView.findViewById(R.id.song_main_container);
+        this.cardView = itemView.findViewById(R.id.album_main_container);
     }
 }
