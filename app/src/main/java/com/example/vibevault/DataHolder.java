@@ -1,5 +1,6 @@
 package com.example.vibevault;
 
+import com.example.vibevault.artists.Artist;
 import com.example.vibevault.songs.Song;
 import com.example.vibevault.albums.Album;
 
@@ -13,6 +14,8 @@ public class DataHolder {
     private Song holdedSong;
 
     private List<Song> topSongs;
+
+    private List<Artist> topArtists;
 
     private List<Album> topAlbums;
 
@@ -29,6 +32,7 @@ public class DataHolder {
         savedFragment = 0;
         topSongs = new ArrayList<>();
         favSongs= new ArrayList<>();
+        topArtists = new ArrayList<>();
         topAlbums = new ArrayList<>();
     }
 
@@ -90,5 +94,13 @@ public class DataHolder {
 
     public void setTopAlbums(List<Album> topAlbums) {
         this.topAlbums = topAlbums;
+    }
+
+    public List<Artist> getTopArtists() {
+        return topArtists;
+    }
+
+    public void setTopArtists(List<Artist> topArtists) {
+        this.topArtists = topArtists;
     }
 }

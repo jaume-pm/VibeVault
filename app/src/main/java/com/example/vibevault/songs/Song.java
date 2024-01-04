@@ -1,6 +1,7 @@
 package com.example.vibevault.songs;
 
 import com.example.vibevault.albums.Album;
+import com.example.vibevault.artists.Artist;
 
 import java.util.List;
 
@@ -10,15 +11,15 @@ public class Song {
     private String name;
     private int duration_ms;
     private Album album;
-    private List<Artists> artists;
+    private Artist artist;
 
     private int popularity;
 
     private boolean isFavourite = false;
 
-    public class Artists { // Cuando se defina artists, hay que cambiar esto.
+   /* public class Artists { // Cuando se defina artists, hay que cambiar esto.
         public String name;
-    }
+    }*/
 
     public String getId() {
         return id;
@@ -44,6 +45,10 @@ public class Song {
         this.duration_ms = duration_ms;
     }
 
+    public Artist getArtist() {
+        return artist;
+    }
+
     public Album getAlbum() {
         return album;
     }
@@ -52,12 +57,12 @@ public class Song {
         this.album = album;
     }
 
-    public List<Artists> getArtists() {
+   /* public List<Artists> getArtists() {
         return artists;
     }
-
-    public void setArtists(List<Artists> artists) {
-        this.artists = artists;
+*/
+    public void setArtists(Artist artist) {
+        this.artist = artist;
     }
 
     public String getAlbumCover(int opt) {
