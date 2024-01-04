@@ -14,6 +14,8 @@ public class Song {
 
     private int popularity;
 
+    private boolean isFavourite = false;
+
     public class Artists { // Cuando se defina artists, hay que cambiar esto.
         public String name;
     }
@@ -68,5 +70,13 @@ public class Song {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }

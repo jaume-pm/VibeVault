@@ -14,11 +14,17 @@ tools:context=".MainActivity">
         android:background="@xml/rounded_corners_grey"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
             <EditText
                 android:id="@+id/main_search_inp"

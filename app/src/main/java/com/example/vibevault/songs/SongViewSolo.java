@@ -3,6 +3,7 @@ package com.example.vibevault.songs;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,10 +26,9 @@ public class SongViewSolo extends AppCompatActivity {
 
     private Song song;
 
-    private TextView name, albumTxt, artistsTxt, duration;
+    private TextView name, albumTxt, artistsTxt, duration, date, popularity;
 
     private ImageView albumCover, artistsImg;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,8 @@ public class SongViewSolo extends AppCompatActivity {
             albumTxt = findViewById(R.id.soloSongAlbum_txt);
             artistsTxt = findViewById(R.id.soloSongArtist_txt);
             duration = findViewById(R.id.soloSongDuration_txt);
+            date = findViewById(R.id.soloSongRelease_txt);
+            popularity = findViewById(R.id.soloSongPopularity_txt);
 
             albumCover = findViewById(R.id.soloSongAlbum_img);
             artistsImg = findViewById(R.id.soloSongArtist_img);
@@ -67,8 +69,13 @@ public class SongViewSolo extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         ApiResponseSearchSong apiResponseSearchSong = response.body();
                         song = apiResponseSearchSong.getTrack();
+                        Glide.with(SongViewSolo.this).load(song.getAlbum().getImage(1)).into(albumCover);
+                        ImageBlur.loadBlurredImage(artistsImg, song.getAlbum().getImage(1), SongViewSolo.this, 8.0f);
                         name.setText(song.getName());
                         albumTxt.setText(song.getAlbum().getName());
+                        date.setText(song.getAlbum().getRelease_date());
+                        String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + String.valueOf(song.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
+                        popularity.setText(Html.fromHtml(popuString));
                         /*
                         String aux = song.getArtists().get(0).name;
                         for(int i = 1; i < song.getArtists().size(); i++){
@@ -76,8 +83,6 @@ public class SongViewSolo extends AppCompatActivity {
                         }
                         */
                         duration.setText(convertMillisToMinSec(song.getDuration_ms()));
-                        Glide.with(SongViewSolo.this).load(song.getAlbum().getImage(1)).into(albumCover);
-                        ImageBlur.loadBlurredImage(artistsImg, song.getAlbum().getImage(1), SongViewSolo.this, 8.0f);
                         // Falta fer el mateix d'album, pero amb artists
 
                     }

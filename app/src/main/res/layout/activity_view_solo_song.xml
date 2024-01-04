@@ -30,7 +30,7 @@
         android:id="@+id/soloSongAlbum_img"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/cover"
         app:layout_constraintBottom_toBottomOf="@+id/soloSongArtist_img"
@@ -41,54 +41,172 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="415dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/soloSongAlbum_img">
 
         <TextView
             android:id="@+id/soloSongName_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text="Nombre"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/soloSongArtist_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="3dp"
+            android:gravity="center"
             android:text="Artistas"
-            android:textColor="@color/vibeVault_light_grey" />
+            android:textColor="@color/vibeVault_light_grey"
+            android:textSize="13sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/soloSongDuration_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="420dp"
-        android:text="00:00"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/vibeVault_light_grey" />
 
-    <TextView
-        android:id="@+id/soloSongAlbum_txt"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="124dp"
-        android:text="TextView"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <!-- Álbum -->
+        <LinearLayout
+            android:layout_width="145dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="10dp"
+            android:background="@xml/rounded_corners_grey"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingRight="8dp">
+
+            <TextView
+                android:id="@+id/soloSongAlbum_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/fixAlbum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Álbum"
+                android:textColor="@color/vibeVault_light_grey"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Duración -->
+        <LinearLayout
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:background="@xml/rounded_corners_grey"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/soloSongDuration_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="00:00"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/fixDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Duración"
+                android:textColor="@color/vibeVault_light_grey"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <!-- Fecha de Estreno -->
+        <LinearLayout
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:background="@xml/rounded_corners_grey"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/soloSongRelease_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Estreno"
+                android:textColor="@color/vibeVault_light_grey"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/fixPopularidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Popularidad"
+            android:textColor="@color/white"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/soloSongPopularity_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/vibeVault_light_grey"
+            android:textSize="12sp"
+            android:justificationMode="inter_word"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +228,7 @@
             android:background="@xml/circle_grey"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/favorite_icon"
-            app:tint="@color/vibeVault_blue"/>
+            app:tint="@color/vibeVault_blue" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
