@@ -40,8 +40,8 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         final String artistName = artistList.get(position).getName();
 
         holder.artistName.setText(artistName);
-        Glide.with(context).load(artistList.get(position).getImage()).into(holder.artistImg);
-        holder.artistFollowers.setText(artistList.get(position).getFollowersCount());
+        Glide.with(context).load(artistList.get(position).getArtistProfilePic(1)).into(holder.artistImg);
+        holder.artistFollowers.setText("Seguidores: " + String.valueOf(artistList.get(position).getFollowersCount()));
 
         holder.artistCardview.setOnClickListener(new View.OnClickListener() {
             @Override

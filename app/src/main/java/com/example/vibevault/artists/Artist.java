@@ -74,6 +74,10 @@ public class Artist {
         return images;
     }
 
+    public String getArtistProfilePic(int opt) {
+        return images.get(opt).url;
+    }
+
     public void setImage(List<Images> images) {
         this.images = images;
     }

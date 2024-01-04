@@ -16,16 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vibevault.APIServicesToken.ApiTokenResponse;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
-import com.example.vibevault.albums.AlbumViewAdapter;
-import com.example.vibevault.albums.AlbumViewFragment;
 import com.example.vibevault.interfaces.SelectListener;
 import com.example.vibevault.interfaces.SpotifyAPIService;
-import com.example.vibevault.interfaces.SpotifyAPIToken;
 import com.example.vibevault.songs.Song;
-import com.example.vibevault.songs.api.ApiResponseGetSongs;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -53,17 +48,17 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
 
         try {
             List<Song> s = DataHolder.getInstance().getTopSongs();
-            Set<String> artistId = new HashSet<>();
-            String artistsForSearch = "";
-            for(int i = 0; i < 3; i++){
+            Set<String> notSame = new HashSet<>();
+            String artistIds = "";
+            for(int i = 0; i < 25; i++){
                 for(Artist a : s.get(i).getArtists()){
-                    if (!artistId.contains(a.getId())) {
-                        artistsForSearch = artistsForSearch + "," + a.getId();
-                        artistId.add(a.getId());
+                    if (!notSame.contains(a.getId())) {
+                        artistIds = artistIds + "," + a.getId();
+                        notSame.add(a.getId());
                     }
                 }
             }
-            artistsForSearch = artistsForSearch.substring(1);
+            artistIds = artistIds.substring(1);
 
             Retrofit retrofitAPI = new Retrofit.Builder()
                     .baseUrl("https://api.spotify.com/")
@@ -73,7 +68,6 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
             SpotifyAPIService spotifyAPIServiceArtists = retrofitAPI.create(SpotifyAPIService.class);
             // Realiza la llamada a la API de Spotify para obtener las canciones
             String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
-            String artistIds = "2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6";
             Call<ApiResponseGetArtists> callArtists = spotifyAPIServiceArtists.getArtists(artistIds, authToken);
             callArtists.enqueue(new Callback<ApiResponseGetArtists>() {
                 @Override
@@ -95,10 +89,6 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
                     // Manejar error
                 }
             });
-
-
-            DataHolder.getInstance().setTopArtists(artist_list);
-            setUpAdapter(context);
         } catch (Exception e){
             Toast.makeText(context, "No se ha podido obtener artistas de la API", Toast.LENGTH_SHORT).show();
         }
