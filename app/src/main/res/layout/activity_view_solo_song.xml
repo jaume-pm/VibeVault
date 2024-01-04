@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bad_bunny_concierto_problema_con_los_boletos" />
+        app:srcCompat="@drawable/logo_carga" />
 
     <ImageView
         android:id="@+id/soloBlackBaground_img"
@@ -32,7 +32,7 @@
         android:layout_height="125dp"
         android:layout_marginBottom="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/cover"
+        android:src="@drawable/logo_carga"
         app:layout_constraintBottom_toBottomOf="@+id/soloSongArtist_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

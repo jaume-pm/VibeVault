@@ -77,12 +77,6 @@ public class SongViewSolo extends AppCompatActivity {
             play.setOnClickListener(buttonAction);
 
             mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioAttributes(
-                    new AudioAttributes.Builder()
-                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                            .setUsage(AudioAttributes.USAGE_MEDIA)
-                            .build()
-            );
 
             Retrofit retrofitAPI = new Retrofit.Builder()
                     .baseUrl("https://api.spotify.com/")
@@ -119,24 +113,25 @@ public class SongViewSolo extends AppCompatActivity {
                         // Falta fer el mateix d'album, pero amb artists
 
                         try {
-                            Log.d("URL", song.getPreview_url());
-                            mediaPlayer.setDataSource(song.getPreview_url()); // URL
-                            mediaPlayer.prepareAsync();
-                            isPLayable = true;
+                            if(song.getPreview_url() != null) {
+                                mediaPlayer.setDataSource(song.getPreview_url()); // URL
+                                mediaPlayer.prepareAsync();
+                                isPLayable = true;
 
-                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                @Override
-                                public void onPrepared(MediaPlayer mp) {
-                                    // El MediaPlayer está listo, pero no iniciamos la reproducción aquí
-                                }
-                            });
-                            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                @Override
-                                public void onCompletion(MediaPlayer mp) {
-                                    isPlaying = false;
-                                    play.setImageResource(R.drawable.play_icon); // Restableix el botó
-                                }
-                            });
+                                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    @Override
+                                    public void onPrepared(MediaPlayer mp) {
+                                        // El MediaPlayer está listo, pero no iniciamos la reproducción aquí
+                                    }
+                                });
+                                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                    @Override
+                                    public void onCompletion(MediaPlayer mp) {
+                                        isPlaying = false;
+                                        play.setImageResource(R.drawable.play_icon); // Restableix el botó
+                                    }
+                                });
+                            } else throw new IOException();
                         } catch (IOException e) {
                             isPLayable = false;
                         }
@@ -179,7 +174,7 @@ public class SongViewSolo extends AppCompatActivity {
                         isPlaying = false;
                         play.setImageResource(R.drawable.play_icon);
                     }
-                }
+                } else Toast.makeText(SongViewSolo.this, "Esta canción no se puede reproducir", Toast.LENGTH_SHORT).show();
             }
         }
     };
