@@ -3,7 +3,6 @@ package com.example.vibevault.artists;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
+import com.example.vibevault.artists.api.ApiResponseGetArtists;
 import com.example.vibevault.interfaces.SelectListener;
 import com.example.vibevault.interfaces.SpotifyAPIService;
 import com.example.vibevault.songs.Song;
@@ -77,6 +77,8 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
                             ApiResponseGetArtists apiResponseGetArtists = response.body();
 
                             artist_list = apiResponseGetArtists.getArtists();
+
+                            artist_list.sort(Comparator.comparingInt(Artist::getFollowersCount).reversed());
 
                             DataHolder.getInstance().setTopArtists(artist_list);
                             setUpAdapter(context);

@@ -25,6 +25,8 @@ public class DataHolder {
 
     private String token_type;
 
+    private List<Song> tempSongs;
+
     // Se podria usar para comprobar si el token ha caducado, si es asi hacer un refresh
     // private int expires_in; (de momento no se usa)
 

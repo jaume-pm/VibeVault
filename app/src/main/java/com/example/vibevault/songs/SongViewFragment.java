@@ -124,8 +124,8 @@ public class SongViewFragment extends Fragment implements SelectListener {
         super.onCreate(savedInstanceState);
         song_list = new ArrayList<>();
         results = new ArrayList<>();
-
         if(!DataHolder.getInstance().getTopSongs().isEmpty()) song_list = DataHolder.getInstance().getTopSongs();
+        else if(!DataHolder.getInstance().getTopSongs().isEmpty()) song_list = DataHolder.getInstance().getTopSongs();
     }
 
     @Override

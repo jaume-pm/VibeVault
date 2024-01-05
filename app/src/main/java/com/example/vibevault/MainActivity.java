@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.vibevault.albums.AlbumViewFragment;
 import com.example.vibevault.albums.AlbumViewSolo;
 import com.example.vibevault.artists.ArtistViewFragment;
+import com.example.vibevault.artists.ArtistViewSolo;
 import com.example.vibevault.songs.SongViewFragment;
 import com.example.vibevault.songs.SongViewSolo;
 
@@ -86,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 if(selectedFragment == 0) { // Songs
                     intent = new Intent(MainActivity.this, SongViewSolo.class);
-                }/* else if (selectedFragment == 1){ // Artists
+                }else if (selectedFragment == 1){ // Artists
                     intent = new Intent(MainActivity.this, ArtistViewSolo.class);
-                }*/
+                }
                 else { // Albums
                     intent = new Intent(MainActivity.this, AlbumViewSolo.class);
                 }
