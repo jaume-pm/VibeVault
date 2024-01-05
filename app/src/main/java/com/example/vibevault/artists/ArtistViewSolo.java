@@ -82,13 +82,13 @@ public class ArtistViewSolo extends AppCompatActivity {
                         name.setText(artist.getName());
                         followers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
 
-                        String aux = artist.getGenres().get(0);
+                        String aux = artist.getGenres().get(0).toUpperCase();
                         for (int i = 1; i < artist.getGenres().size(); i++){
-                            aux = aux + ", " + artist.getGenres().get(i);
+                            aux = aux + ", " + artist.getGenres().get(i).toUpperCase();
                         }
                         genres.setText(aux);
 
-                        String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + String.valueOf(artist.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
+                        String popuString = "Según Spotify, este artista tiene una valoración de <b>" + String.valueOf(artist.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
                         popularity.setText((Html.fromHtml(popuString)));
                     }
                 }
