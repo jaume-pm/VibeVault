@@ -17,6 +17,7 @@ import com.example.vibevault.albums.AlbumViewFragment;
 import com.example.vibevault.albums.AlbumViewSolo;
 import com.example.vibevault.artists.ArtistViewFragment;
 import com.example.vibevault.artists.ArtistViewSolo;
+import com.example.vibevault.favourite.FavouriteGlobalViewFragment;
 import com.example.vibevault.songs.SongViewFragment;
 import com.example.vibevault.songs.SongViewSolo;
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         fragments[0] = new SongViewFragment();
         fragments[1] = new ArtistViewFragment();
         fragments[2] = new AlbumViewFragment();
-        fragments[3] = new SongViewFragment();
+        fragments[3] = new FavouriteGlobalViewFragment();
         //fragments[1] = new ExempleViewFragment();
         setContentView(R.layout.activity_main);
 
