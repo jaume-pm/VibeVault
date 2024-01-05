@@ -69,7 +69,7 @@ public class ArtistViewSolo extends AppCompatActivity {
             String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
 
             NAME = NAME.replace(" ", "+");
-            spotifyAPIServiceArtists.getArtist(NAME, "track", 1, 0, "audio", authToken).enqueue(new Callback<ApiResponseSearchArtist>() {
+            spotifyAPIServiceArtists.getArtist(NAME, "artist", 1, 0, "", authToken).enqueue(new Callback<ApiResponseSearchArtist>() {
 
                 @Override
                 public void onResponse(Call<ApiResponseSearchArtist> call, Response<ApiResponseSearchArtist> response) {
