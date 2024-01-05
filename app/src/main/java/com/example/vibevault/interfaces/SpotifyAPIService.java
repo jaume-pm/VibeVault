@@ -8,6 +8,7 @@ import com.example.vibevault.songs.api.ApiResponseSearchSong;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface SpotifyAPIService {
@@ -37,13 +38,11 @@ public interface SpotifyAPIService {
             @Header("Authorization") String authToken
     );
 
-    @GET("v1/search") // Pide un album a la api de spotify
+    @GET("v1/albums/{id}") // Define the endpoint for retrieving an album by its ID
     Call<ApiResponseSearchAlbum> getAlbum(
-            @Query("q") String trackName,
-            @Query("type") String type,
-            @Query("limit") int limit,
-            @Query("offset") int offset,
+            @Path("id") String albumId, // Use @Path to specify the album ID as a path parameter
             @Header("Authorization") String authToken
     );
+
     // END ALBUMS //////////////////////////////////////////////////////////////////
 }

@@ -24,7 +24,10 @@ import com.example.vibevault.interfaces.SpotifyAPIToken;
 import com.example.vibevault.songs.api.ApiResponseGetSongs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -92,14 +95,24 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
                                 if (response.isSuccessful() && response.body() != null) {
                                     ApiResponseGetSongs apiResponseGetSongs = response.body();
 
-                                    for (ApiResponseGetSongs.ItemsSong i : apiResponseGetSongs.getTracks()) {
-                                        album_list.add(i.track.getAlbum());
-                                    }
+                                    // Create a Set to store unique albums based on their ids
+                                    Set<String> uniqueAlbumIds = new HashSet<>();
 
+                                    for (ApiResponseGetSongs.ItemsSong i : apiResponseGetSongs.getTracks()) {
+                                        Album currentAlbum = i.track.getAlbum();
+
+                                        // Check if the album's id is already in the Set
+                                        if (!uniqueAlbumIds.contains(currentAlbum.getId())) {
+                                            // If not, add the album to the list and the id to the Set
+                                            album_list.add(currentAlbum);
+                                            uniqueAlbumIds.add(currentAlbum.getId());
+                                        }
+                                    }
                                     DataHolder.getInstance().setTopAlbums(album_list);
                                     setUpAdapter(context);
                                 }
                             }
+
 
                             @Override
                             public void onFailure(Call<ApiResponseGetSongs> call, Throwable throwable) {

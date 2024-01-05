@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SelectListener;
 import com.example.vibevault.albums.Album;
@@ -44,7 +45,7 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
             aux = aux + a.name + ", ";
         }
         holder.artists.setText(aux.substring(0, aux.length() - 2));
-        //Glide.with(context).load(albumList.get(position).into(holder.albumImg);
+        Glide.with(context).load(albumList.get(position).getImage(2)).into(holder.albumImg);
         //holder.like.setBackground();
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

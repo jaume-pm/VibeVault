@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.vibevault.albums.AlbumViewFragment;
 import com.example.vibevault.albums.AlbumViewSolo;
+import com.example.vibevault.artists.ArtistViewFragment;
 import com.example.vibevault.songs.SongViewFragment;
 import com.example.vibevault.songs.SongViewSolo;
 
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragments = new Fragment[4];
-        fragments[0] = new SongViewFragment();
-        fragments[1] = new AlbumViewFragment();
-        fragments[2] = new SongViewFragment();
+        fragments[0] = new AlbumViewFragment();
+        fragments[1] = new ArtistViewFragment();
+        fragments[2] = new AlbumViewFragment();
         fragments[3] = new SongViewFragment();
         //fragments[1] = new ExempleViewFragment();
         setContentView(R.layout.activity_main);

@@ -7,16 +7,12 @@ import java.util.List;
 
 public class ApiResponseSearchAlbum {
 
-    private Tracks tracks;
+    private Album album;
 
     // Constructor, getters y setters
     public ApiResponseSearchAlbum() {
     }
 
-    private class Tracks {
-        public List<Album> items;
 
-    }
-
-    public Album getTrack() { return tracks.items.get(0);}
+    public Album getAlbum() { return album;}
 }

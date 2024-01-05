@@ -22,10 +22,10 @@ public class AlbumViewHolder extends RecyclerView.ViewHolder {
 
     public AlbumViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.albumImg = itemView.findViewById(R.id.song_img);
-        this.name = itemView.findViewById(R.id.song_name);
-        this.artists = itemView.findViewById(R.id.song_singers);
-        this.like = itemView.findViewById(R.id.song_like_btn);
+        this.albumImg = itemView.findViewById(R.id.album_img);
+        this.name = itemView.findViewById(R.id.album_name);
+        this.artists = itemView.findViewById(R.id.album_singers);
+        this.like = itemView.findViewById(R.id.album_like_btn);
         this.cardView = itemView.findViewById(R.id.album_main_container);
     }
 }

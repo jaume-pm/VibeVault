@@ -17,6 +17,12 @@ public class Album {
 
     private String release_date;
 
+    private String album_type;
+
+    private String popularity;
+
+    private boolean isFavourite;
+
     public String getId() {
         return id;
     }
@@ -70,6 +76,22 @@ public class Album {
         this.release_date = release_date;
     }
 
+    public String getAlbum_type() {
+        return album_type;
+    }
+
+    public void setAlbum_type(String album_type) {
+        this.album_type = album_type;
+    }
+
+    public String getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(String popularity) {
+        this.popularity = popularity;
+    }
+
     private class Images {
         public String url;
 
@@ -90,4 +112,11 @@ public class Album {
         this.songs = songs;
     }
      */
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 }

@@ -1,6 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".albums.AlbumViewSolo">
+
+
+    <ImageView
+        android:id="@+id/soloAlbumArtist_img"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_carga" />
+
+    <ImageView
+        android:id="@+id/soloBlackBackground_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/fondo_negro" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/soloAlbum_img"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginBottom="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_carga"
+        app:layout_constraintBottom_toBottomOf="@+id/soloAlbumArtist_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/soloAlbum_img">
+
+        <TextView
+            android:id="@+id/soloAlbumName_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Nombre"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/soloAlbumArtist_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:text="Artistas"
+            android:textColor="@color/vibeVault_light_grey"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <!-- Álbum -->
+        <LinearLayout
+            android:layout_width="145dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="10dp"
+            android:background="@xml/rounded_corners_grey"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingRight="8dp">
+
+            <TextView
+                android:id="@+id/soloAlbumType_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/fixAlbum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Tipo"
+                android:textColor="@color/vibeVault_light_grey"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Duración -->
+        <LinearLayout
+            android:layout_width="75dp"
+            android:layout_height="90dp"
+            android:background="@xml/rounded_corners_grey"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/soloAlbumDuration_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/fixDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Canciones"
+                android:textColor="@color/vibeVault_light_grey"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <!-- Fecha de Estreno -->
+        <LinearLayout
+            android:layout_width="75dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="10dp"
+            android:background="@xml/rounded_corners_grey"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/soloAlbumRelease_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Estreno"
+                android:textColor="@color/vibeVault_light_grey"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="22dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/fixPopularidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Popularidad"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/soloAlbumPopularity_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:justificationMode="inter_word"
+            android:text="TextView"
+            android:textColor="@color/vibeVault_light_grey"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/soloAlbumGoBack_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="35dp"
+            android:background="@xml/circle_grey"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/back_icon" />
+
+        <ImageButton
+            android:id="@+id/soloAlbumAddFav_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@xml/circle_grey"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/favorite_icon"
+            app:tint="@color/vibeVault_blue" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
