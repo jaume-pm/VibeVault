@@ -1,5 +1,6 @@
 package com.example.vibevault.interfaces;
 
+import com.example.vibevault.albums.Album;
 import com.example.vibevault.albums.api.ApiResponseGetAlbums;
 import com.example.vibevault.albums.api.ApiResponseSearchAlbum;
 import com.example.vibevault.artists.api.ApiResponseGetArtists;
@@ -59,8 +60,9 @@ public interface SpotifyAPIService {
     );
 
     @GET("v1/albums/{id}") // Define the endpoint for retrieving an album by its ID
-    Call<ApiResponseSearchAlbum> getAlbum(
+    Call<Album> getAlbum(
             @Path("id") String albumId, // Use @Path to specify the album ID as a path parameter
+            @Query("market") String market,
             @Header("Authorization") String authToken
     );
 

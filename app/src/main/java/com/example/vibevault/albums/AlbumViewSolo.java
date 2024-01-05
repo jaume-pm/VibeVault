@@ -24,7 +24,7 @@ public class AlbumViewSolo extends AppCompatActivity {
 
     private Album album;
 
-    private TextView name, artistsTxt, date, popularity;
+    private TextView name, artistsTxt, date, popularity, type, total_tracks;
 
     private ImageView albumCover, artistsImg;
 
@@ -43,6 +43,9 @@ public class AlbumViewSolo extends AppCompatActivity {
             name = findViewById(R.id.soloAlbumName_txt);
             artistsTxt = findViewById(R.id.soloAlbumArtist_txt);
             date = findViewById(R.id.soloAlbumRelease_txt);
+            type = findViewById(R.id.soloAlbumType_txt);
+            total_tracks = findViewById(R.id.soloAlbumTotalTracks_txt);
+
 
             albumCover = findViewById(R.id.soloAlbum_img);
             artistsImg = findViewById(R.id.soloAlbumArtist_img);
@@ -64,18 +67,22 @@ public class AlbumViewSolo extends AppCompatActivity {
 
             // Make the call to the Spotify API to get album details
             String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
-            spotifyAPIServiceAlbum.getAlbum(ID, authToken).enqueue(new Callback<ApiResponseSearchAlbum>() {
+            spotifyAPIServiceAlbum.getAlbum(ID, "ES", authToken).enqueue(new Callback<Album>() {
                 @Override
-                public void onResponse(Call<ApiResponseSearchAlbum> call, Response<ApiResponseSearchAlbum> response) {
+                public void onResponse(Call<Album> call, Response<Album> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        ApiResponseSearchAlbum apiResponseSearchAlbum = response.body();
-                        album = apiResponseSearchAlbum.getAlbum();
+                        Album album = response.body();
+
+                        // Now you can work with the 'album' object directly
+                        // For example, access album properties like album.getId(), album.getName(), etc.
 
                         if (album != null) {
-                            Glide.with(AlbumViewSolo.this).load(album.getImage(0)).into(albumCover); // Use the first image
+                            Glide.with(AlbumViewSolo.this).load(album.getImage(0)).into(albumCover);
                             ImageBlur.loadBlurredImage(artistsImg, album.getImage(0), AlbumViewSolo.this, 8.0f);
                             name.setText(album.getName());
                             date.setText(album.getRelease_date());
+                            total_tracks.setText(String.valueOf(album.getTotal_tracks()));
+                            type.setText(album.getAlbum_type());
                             String popuString = "Según Spotify, este álbum tiene una valoración de <b>" + album.getPopularity() + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones del álbum y lo reciente que es.";
                             popularity.setText(Html.fromHtml(popuString));
                         }
@@ -83,11 +90,13 @@ public class AlbumViewSolo extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ApiResponseSearchAlbum> call, Throwable throwable) {
+                public void onFailure(Call<Album> call, Throwable throwable) {
                     Toast.makeText(AlbumViewSolo.this, "No hay resultados", Toast.LENGTH_SHORT).show();
-                    finish(); // Close this activity and return to MainActivity
+                    finish();
                 }
             });
+
+
         }
     }
 

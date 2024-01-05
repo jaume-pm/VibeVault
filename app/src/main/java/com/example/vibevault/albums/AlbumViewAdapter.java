@@ -38,6 +38,7 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
 
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
         final String name = albumList.get(position).getName();
+        final String id = albumList.get(position).getId();
 
         holder.name.setText(albumList.get(position).getName().substring(0, 1).toUpperCase() + albumList.get(position).getName().substring(1));
         String aux = "";
@@ -51,7 +52,7 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), name);
+                listener.OnItemClicked(v.getContext(), id);
             }
         });
     }
