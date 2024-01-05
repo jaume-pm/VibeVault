@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/soloArtist_img"
+        android:id="@+id/soloArtistBckg_img"
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:scaleType="centerCrop"
@@ -27,13 +27,13 @@
         app:srcCompat="@drawable/fondo_negro" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/soloArtistAlbum_img"
+        android:id="@+id/soloArtist_img"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginBottom="40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/logo_carga"
-        app:layout_constraintBottom_toBottomOf="@+id/soloArtist_img"
+        app:layout_constraintBottom_toBottomOf="@+id/soloArtistBckg_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -46,7 +46,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soloArtistAlbum_img">
+        app:layout_constraintTop_toBottomOf="@+id/soloArtist_img">
 
         <TextView
             android:id="@+id/soloArtistName_txt"
