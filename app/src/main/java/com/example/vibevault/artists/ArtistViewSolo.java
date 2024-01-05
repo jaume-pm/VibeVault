@@ -3,6 +3,7 @@ package com.example.vibevault.artists;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ public class ArtistViewSolo extends AppCompatActivity {
         setContentView(R.layout.activity_view_solo_artist);
 
         String NAME = getIntent().getStringExtra("NAME");
+        Log.e("ERROR", NAME);
         if (NAME == null || NAME.isEmpty()) {
             Toast.makeText(this, "No hay resultados", Toast.LENGTH_SHORT).show();
             finish(); // Cierra esta activity y regresa a MainActivity
@@ -68,7 +70,6 @@ public class ArtistViewSolo extends AppCompatActivity {
             // Realiza la llamada a la API de Spotify para obtener las canciones
             String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
 
-            NAME = NAME.replace(" ", "+");
             spotifyAPIServiceArtists.getArtist(NAME, "artist", 1, 0, "", authToken).enqueue(new Callback<ApiResponseSearchArtist>() {
 
                 @Override
@@ -76,10 +77,10 @@ public class ArtistViewSolo extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         ApiResponseSearchArtist apiResponseSearchArtist = response.body();
                         artist = apiResponseSearchArtist.getArtist();
-                        /*Glide.with(ArtistViewSolo.this).load(artist.getImage().into(artistImg));
-                        ImageBlur.loadBlurredImage(artistImg, artist.getArtistProfilePic(1), );*/
+                        Glide.with(ArtistViewSolo.this).load(artist.getArtistProfilePic(1)).into(artistImg);
+                        ImageBlur.loadBlurredImage(artistBackgroundImg, artist.getArtistProfilePic(1), ArtistViewSolo.this, 8.0f);
                         name.setText(artist.getName());
-                        followers.setText(artist.getFollowersCount());
+                        followers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
 
                         String aux = artist.getGenres().get(0);
                         for (int i = 1; i < artist.getGenres().size(); i++){
