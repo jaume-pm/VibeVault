@@ -18,6 +18,9 @@
         <activity
             android:name=".songs.SongViewSolo"
             android:exported="false" />
+        <activity
+            android:name=".artists.ArtistViewSolo"
+            android:exported="false" />
         <activity android:name=".albums.AlbumViewSolo"
             android:exported="false" />
         <activity

@@ -69,7 +69,7 @@ public class ArtistViewSolo extends AppCompatActivity {
             String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
 
             NAME = NAME.replace(" ", "+");
-            spotifyAPIServiceArtists.getArtist(NAME, "artist", 1, 0, "", authToken).enqueue(new Callback<ApiResponseSearchArtist>() {
+            spotifyAPIServiceArtists.getArtist(NAME, "artist", 1, 0, "audio", authToken).enqueue(new Callback<ApiResponseSearchArtist>() {
 
                 @Override
                 public void onResponse(Call<ApiResponseSearchArtist> call, Response<ApiResponseSearchArtist> response) {
@@ -79,7 +79,7 @@ public class ArtistViewSolo extends AppCompatActivity {
                         /*Glide.with(ArtistViewSolo.this).load(artist.getImage().into(artistImg));
                         ImageBlur.loadBlurredImage(artistImg, artist.getArtistProfilePic(1), );*/
                         name.setText(artist.getName());
-                        followers.setText(artist.getFollowersCount());
+                        followers.setText(String.valueOf(artist.getFollowersCount()));
 
                         String aux = artist.getGenres().get(0);
                         for (int i = 1; i < artist.getGenres().size(); i++){
