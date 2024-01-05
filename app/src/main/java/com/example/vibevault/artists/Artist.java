@@ -1,13 +1,14 @@
 package com.example.vibevault.artists;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Artist {
     private String id;
     private String name;
     private int popularity;
     private ArrayList<String> genres; // ?
-    private Images images;
+    private List<Images> images;
     private Followers followers;
 
     private boolean isFavourite = false;
@@ -61,15 +62,23 @@ public class Artist {
         return followers;
     }
 
+    public int getFollowersCount() {
+        return followers.total;
+    }
+
     public void setFollowers(Followers followers) {
         this.followers = followers;
     }
 
-    public Images getImages() {
+    public List<Images> getImage() {
         return images;
     }
 
-    public void setImages(Images images) {
+    public String getArtistProfilePic(int opt) {
+        return images.get(opt).url;
+    }
+
+    public void setImage(List<Images> images) {
         this.images = images;
     }
 }

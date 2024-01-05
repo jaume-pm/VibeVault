@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SelectListener;
 import com.example.vibevault.songs.Song;
@@ -27,6 +28,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         this.artistList = artistList;
         this.listener = listener;
     }
+
     @NonNull
     @Override
     public ArtistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,8 +39,9 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
         final String artistName = artistList.get(position).getName();
 
-        holder.artistName.setText(artistList.get(position).getName().substring(0, 1).toUpperCase() + artistList.get(position).getName().substring(1));
-        //holder.artistFollowers.setText(String.format(Locale.getDefault(), "%,d Followers", Artist.getFollowers().getTotal()));
+        holder.artistName.setText(artistName);
+        Glide.with(context).load(artistList.get(position).getArtistProfilePic(1)).into(holder.artistImg);
+        holder.artistFollowers.setText("Seguidores: " + String.valueOf(artistList.get(position).getFollowersCount()));
 
         holder.artistCardview.setOnClickListener(new View.OnClickListener() {
             @Override
