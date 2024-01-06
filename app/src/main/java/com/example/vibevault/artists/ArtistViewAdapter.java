@@ -50,7 +50,14 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         if(isInFavoritesArtist(artist.getId())) artist.setFavourite(true);
 
         holder.artistName.setText(artistName);
-        Glide.with(context).load(artistList.get(position).getArtistProfilePic(1)).into(holder.artistImg);
+        String profilePicUrl = artistList.get(position).getArtistProfilePic(1);
+        if (profilePicUrl != null) {
+            Glide.with(context).load(profilePicUrl).into(holder.artistImg);
+        }
+        /*if (artistList != null && position < artistList.size()) {
+            Glide.with(context).load(artistList.get(position).getArtistProfilePic(1)).into(holder.artistImg);
+        }*/
+
         holder.artistFollowers.setText("Seguidores: " + String.valueOf(artistList.get(position).getFollowersCount()));
 
         if (artist.isFavourite()) holder.artistLike.setImageResource(R.drawable.filledheart_icon);

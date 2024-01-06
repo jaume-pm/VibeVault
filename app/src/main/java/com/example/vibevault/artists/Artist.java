@@ -68,7 +68,13 @@ public class Artist {
     }
 
     public String getArtistProfilePic(int opt) {
-        return images.get(opt).url;
+        if (images != null && opt >= 0 && opt < images.size()) {
+            return images.get(opt).url;
+        } else {
+            // Devolver una URL por defecto o null si el índice está fuera de los límites
+            // Por ejemplo, devuelve null o una URL de una imagen por defecto
+            return null; // o "URL_de_imagen_por_defecto"
+        }
     }
 
     public void setImage(List<Image> images) {
