@@ -18,14 +18,27 @@ public class Favorites {
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private static List<Artist> favoriteArtists = new ArrayList<>();
-    private static List<Song> favoriteSongs = new ArrayList<>();;
-    private static List<Album> favoriteAlbums = new ArrayList<>();;
+    private static List<Song> favoriteSongs = new ArrayList<>();
+    private static List<Album> favoriteAlbums = new ArrayList<>();
 
     private static boolean is_favoriteArtistsComplete = true;
     private static boolean is_favoriteAlbumsComplete = false;
     private static boolean is_favoriteSongsComplete = true;
 
     
+    public static boolean isInFavoritesAlbums(String id){
+        return favoriteAlbums.stream()
+                .anyMatch(album -> album.getId().equals(id));
+    }
+
+    public static boolean isInFavoritesArtist(String id){
+        return favoriteArtists.stream()
+                .anyMatch(artist -> artist.getId().equals(id));
+    }
+    public static boolean isInFavoritesSongs(String id){
+        return favoriteSongs.stream()
+                .anyMatch(song -> song.getId().equals(id));
+    }
 
     public static void saveFavoriteArtist(Artist artist) {
         favoriteArtists.add(artist);

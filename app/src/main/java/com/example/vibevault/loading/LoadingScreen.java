@@ -24,7 +24,7 @@ public class LoadingScreen extends AppCompatActivity {
 
         Favorites.downloadFavoritesAlbums();
         Favorites.downloadFavoritesArtists();
-        //Favorites.downloadFavoritesSongs();
+        Favorites.downloadFavoritesSongs();
 
 
 

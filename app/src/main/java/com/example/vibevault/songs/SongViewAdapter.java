@@ -2,6 +2,8 @@ package com.example.vibevault.songs;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteSong;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesAlbums;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesSongs;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteSong;
 
@@ -45,6 +47,8 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
         Song song = songList.get(position);
         final String name = songList.get(position).getName();
 
+        if(isInFavoritesSongs(song.getId())) song.setFavourite(true);
+
         holder.name.setText(name);
         String aux = "";
         for(Artist a : songList.get(position).getArtists()) {
@@ -52,7 +56,9 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
         }
         holder.artists.setText(aux.substring(0, aux.length() - 2));
         Glide.with(context).load(songList.get(position).getAlbumCover(2)).into(holder.songImg);
-        //holder.like.setBackground();
+
+        if (song.isFavourite()) holder.like.setImageResource(R.drawable.filledheart_icon);
+        else holder.like.setImageResource(R.drawable.favorite_icon);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

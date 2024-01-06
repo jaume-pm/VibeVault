@@ -1,6 +1,7 @@
 package com.example.vibevault.albums;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesAlbums;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 
 import android.content.Context;
@@ -45,6 +46,9 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
         final String name = albumList.get(position).getName();
         final String id = albumList.get(position).getId();
 
+        if(isInFavoritesAlbums(album.getId())) album.setFavourite(true);
+
+
         holder.name.setText(albumList.get(position).getName().substring(0, 1).toUpperCase() + albumList.get(position).getName().substring(1));
         String aux = "";
         for(Artist a : albumList.get(position).getArtists()) {
@@ -59,7 +63,8 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {listener.OnItemClicked(v.getContext(), id);
+            public void onClick(View v) {
+                listener.OnItemClicked(v.getContext(), id);
             }
         });
 
