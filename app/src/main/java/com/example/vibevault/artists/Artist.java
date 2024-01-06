@@ -9,21 +9,25 @@ public class Artist {
     private int popularity;
     private ArrayList<String> genres; // ?
     private List<Images> images;
-    private Followers followers;
+    private Followers followers = new Followers();
 
     private boolean isFavourite = false;
 
-    private class Followers {
-        public String href;
-        public int total;
+    public class Followers {
+        private String href;
+        public int total; // Make total public
+
+        public int getTotal() {
+            return total; // Add a public getter method
+        }
     }
 
     private class Images {
-        public String url;
+        private String url;
 
-        public int height;
+        private int height;
 
-        public int width;
+        private int width;
     }
 
     public String getId() {
