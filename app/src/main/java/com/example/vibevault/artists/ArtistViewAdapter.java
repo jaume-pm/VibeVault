@@ -59,7 +59,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         holder.artistCardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), artistName);
+                listener.OnItemClicked(v.getContext(), artistName, artist.isFavourite());
             }
         });
 

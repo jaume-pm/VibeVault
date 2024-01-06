@@ -136,10 +136,11 @@ public class SongViewFragment extends Fragment implements SelectListener {
     }
 
     @Override
-    public void OnItemClicked(Context context, String name) {
+    public void OnItemClicked(Context context, String name, boolean isFavorite) {
         DataHolder.getInstance().setSavedFragment(0);
         Intent intent = new Intent(context, SongViewSolo.class);
         intent.putExtra("NAME", name);
+        intent.putExtra("isFavorite", isFavorite);
         context.startActivity(intent);
     }
 

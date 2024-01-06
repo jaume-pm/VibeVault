@@ -149,10 +149,11 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
     }
 
     @Override
-    public void OnItemClicked(Context context, String id) {
+    public void OnItemClicked(Context context, String id, boolean isFavorite) {
         DataHolder.getInstance().setSavedFragment(1);
         Intent intent = new Intent(context, AlbumViewSolo.class);
         intent.putExtra("ID", id);
+        intent.putExtra("isFavorite", isFavorite);
         context.startActivity(intent);
     }
 

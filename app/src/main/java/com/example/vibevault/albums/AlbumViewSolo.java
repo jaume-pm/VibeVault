@@ -44,6 +44,7 @@ public class AlbumViewSolo extends AppCompatActivity {
         setContentView(R.layout.activity_view_solo_album); // Use the correct layout resource ID
 
         String ID = getIntent().getStringExtra("ID");
+        boolean isFavorite = getIntent().getBooleanExtra("isFavorite", false);
         if (ID == null || ID.isEmpty()) {
             Toast.makeText(this, "No hay resultados", Toast.LENGTH_SHORT).show();
             finish(); // Close this activity and return to MainActivity
@@ -93,6 +94,9 @@ public class AlbumViewSolo extends AppCompatActivity {
                             type.setText(album.getAlbum_type());
                             String popuString = "Según Spotify, este álbum tiene una valoración de <b>" + album.getPopularity() + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones del álbum y lo reciente que es.";
                             popularity.setText(Html.fromHtml(popuString));
+                            album.setFavourite(isFavorite);
+                            if(album.isFavourite()) addFav.setImageResource(R.drawable.filledheart_icon);
+                            else addFav.setImageResource(R.drawable.favorite_icon);
                         }
                     }
                 }

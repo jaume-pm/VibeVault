@@ -55,6 +55,7 @@ public class SongViewSolo extends AppCompatActivity {
         setContentView(R.layout.activity_view_solo_song);
 
         String NAME = getIntent().getStringExtra("NAME");
+        boolean isFavorite = getIntent().getBooleanExtra("isFavorite", false);
         if (NAME == null || NAME.isEmpty()) {
             Toast.makeText(this, "No hay resultados", Toast.LENGTH_SHORT).show();
             finish(); // Cierra esta activity y regresa a MainActivity
@@ -105,6 +106,10 @@ public class SongViewSolo extends AppCompatActivity {
                         date.setText(song.getAlbum().getRelease_date());
                         String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + String.valueOf(song.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
                         popularity.setText(Html.fromHtml(popuString));
+
+                        song.setFavourite(isFavorite);
+                        if(song.isFavourite()) addFav.setImageResource(R.drawable.filledheart_icon);
+                        else addFav.setImageResource(R.drawable.favorite_icon);
 
                         String aux = song.getArtists().get(0).getName();
                         for(int i = 1; i < song.getArtists().size(); i++){

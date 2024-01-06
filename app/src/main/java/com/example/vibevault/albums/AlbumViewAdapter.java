@@ -64,7 +64,7 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), id);
+                listener.OnItemClicked(v.getContext(), id, album.isFavourite());
             }
         });
 

@@ -44,6 +44,7 @@ public class ArtistViewSolo extends AppCompatActivity {
         setContentView(R.layout.activity_view_solo_artist);
 
         String NAME = getIntent().getStringExtra("NAME");
+        boolean isFavorite = getIntent().getBooleanExtra("isFavorite", false);
         Log.e("ERROR", NAME);
         if (NAME == null || NAME.isEmpty()) {
             Toast.makeText(this, "No hay resultados", Toast.LENGTH_SHORT).show();
@@ -94,6 +95,9 @@ public class ArtistViewSolo extends AppCompatActivity {
 
                         String popuString = "Según Spotify, este artista tiene una valoración de <b>" + String.valueOf(artist.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
                         popularity.setText((Html.fromHtml(popuString)));
+                        artist.setFavourite(isFavorite);
+                        if(artist.isFavourite()) addFav.setImageResource(R.drawable.filledheart_icon);
+                        else addFav.setImageResource(R.drawable.favorite_icon);
                     }
                 }
 
