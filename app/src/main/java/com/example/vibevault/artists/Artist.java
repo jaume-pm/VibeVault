@@ -1,5 +1,9 @@
 package com.example.vibevault.artists;
 
+import androidx.annotation.Nullable;
+
+import com.example.vibevault.utilities.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,27 +12,12 @@ public class Artist {
     private String name;
     private int popularity;
     private ArrayList<String> genres; // ?
-    private List<Images> images;
+    private List<Image> images = new ArrayList<>();
     private Followers followers = new Followers();
 
     private boolean isFavourite = false;
 
-    public class Followers {
-        private String href;
-        public int total; // Make total public
-
-        public int getTotal() {
-            return total; // Add a public getter method
-        }
-    }
-
-    private class Images {
-        private String url;
-
-        private int height;
-
-        private int width;
-    }
+    public Artist(){}
 
     public String getId() {
         return id;
@@ -74,7 +63,7 @@ public class Artist {
         this.followers = followers;
     }
 
-    public List<Images> getImage() {
+    public List<Image> getImage() {
         return images;
     }
 
@@ -82,7 +71,7 @@ public class Artist {
         return images.get(opt).url;
     }
 
-    public void setImage(List<Images> images) {
+    public void setImage(List<Image> images) {
         this.images = images;
     }
 
@@ -94,11 +83,12 @@ public class Artist {
         isFavourite = favourite;
     }
 
-    public List<Images> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Images> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
+
 }

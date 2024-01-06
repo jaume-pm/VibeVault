@@ -19,6 +19,7 @@ import com.example.vibevault.albums.AlbumViewHolder;
 import com.example.vibevault.songs.SongViewHolder;
 
 import java.util.List;
+import com.example.vibevault.artists.Artist;
 
 public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
     private Context context;
@@ -46,8 +47,8 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
 
         holder.name.setText(albumList.get(position).getName().substring(0, 1).toUpperCase() + albumList.get(position).getName().substring(1));
         String aux = "";
-        for(Album.Artist a : albumList.get(position).getArtists()) {
-            aux = aux + a.name + ", ";
+        for(Artist a : albumList.get(position).getArtists()) {
+            aux = aux + a.getName() + ", ";
         }
         if (album.isFavourite()) holder.like.setImageResource(R.drawable.filledheart_icon);
         else holder.like.setImageResource(R.drawable.favorite_icon);
