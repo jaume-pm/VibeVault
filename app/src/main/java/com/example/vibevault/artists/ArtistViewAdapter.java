@@ -1,5 +1,10 @@
 package com.example.vibevault.artists;
 
+import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
+import static com.example.vibevault.firebase.Favorites.deleteFavoriteArtist;
+import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
+import static com.example.vibevault.firebase.Favorites.saveFavoriteArtist;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +42,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
+        Artist artist = artistList.get(position);
         final String artistName = artistList.get(position).getName();
 
         holder.artistName.setText(artistName);
@@ -47,6 +53,22 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
             @Override
             public void onClick(View v) {
                 listener.OnItemClicked(v.getContext(), artistName);
+            }
+        });
+
+        holder.artistLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (artist.isFavourite()) {
+                    deleteFavoriteArtist(artist);
+                    artist.setFavourite(false);
+                    holder.artistLike.setImageResource(R.drawable.favorite_icon);
+                } else {
+                    saveFavoriteArtist(artist);
+                    artist.setFavourite(true);
+                    holder.artistLike.setImageResource(R.drawable.filledheart_icon);
+                }
+
             }
         });
 

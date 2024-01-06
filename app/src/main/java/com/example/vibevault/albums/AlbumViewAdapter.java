@@ -1,5 +1,8 @@
 package com.example.vibevault.albums;
 
+import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
+import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +40,7 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
 
 
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
+        Album album = albumList.get(position);
         final String name = albumList.get(position).getName();
         final String id = albumList.get(position).getId();
 
@@ -45,14 +49,32 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
         for(Album.Artist a : albumList.get(position).getArtists()) {
             aux = aux + a.name + ", ";
         }
+        if (album.isFavourite()) holder.like.setImageResource(R.drawable.filledheart_icon);
+        else holder.like.setImageResource(R.drawable.favorite_icon);
+
         holder.artists.setText(aux.substring(0, aux.length() - 2));
         Glide.with(context).load(albumList.get(position).getImage(2)).into(holder.albumImg);
         //holder.like.setBackground();
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), id);
+            public void onClick(View v) {listener.OnItemClicked(v.getContext(), id);
+            }
+        });
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (album.isFavourite()) {
+                    deleteFavoriteAlbum(album);
+                    album.setFavourite(false);
+                    holder.like.setImageResource(R.drawable.favorite_icon);
+                } else {
+                    saveFavoriteAlbum(album);
+                    album.setFavourite(true);
+                    holder.like.setImageResource(R.drawable.filledheart_icon);
+                }
+
             }
         });
     }

@@ -1,5 +1,9 @@
 package com.example.vibevault.artists;
 
+import static com.example.vibevault.firebase.Favorites.deleteFavoriteArtist;
+import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
+import static com.example.vibevault.firebase.Favorites.saveFavoriteArtist;
+
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
@@ -110,9 +114,11 @@ public class ArtistViewSolo extends AppCompatActivity {
             if(id == back.getId()) finish();
             else if(id == addFav.getId()){
                 if(artist.isFavourite()){
+                    deleteFavoriteArtist(artist);
                     artist.setFavourite(false);
                     addFav.setImageResource(R.drawable.favorite_icon);
                 } else{
+                    saveFavoriteArtist(artist);
                     artist.setFavourite(true);
                     addFav.setImageResource(R.drawable.filledheart_icon);
                 }

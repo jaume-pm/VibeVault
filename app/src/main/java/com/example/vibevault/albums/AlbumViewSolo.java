@@ -1,5 +1,10 @@
 package com.example.vibevault.albums;
 
+import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
+import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
+
+import com.example.vibevault.firebase.Favorites;
+
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -12,8 +17,11 @@ import com.bumptech.glide.Glide;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
 import com.example.vibevault.albums.api.ApiResponseSearchAlbum;
+import com.example.vibevault.firebase.Favorites;
 import com.example.vibevault.interfaces.SpotifyAPIService;
 import com.example.vibevault.utilities.ImageBlur;
+
+import io.grpc.Context;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,7 +79,7 @@ public class AlbumViewSolo extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Album> call, Response<Album> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        Album album = response.body();
+                        album = response.body();
 
                         // Now you can work with the 'album' object directly
                         // For example, access album properties like album.getId(), album.getName(), etc.
@@ -108,9 +116,11 @@ public class AlbumViewSolo extends AppCompatActivity {
             else if (id == addFav.getId()) {
                 if (album != null) {
                     if (album.isFavourite()) {
+                        deleteFavoriteAlbum(album);
                         album.setFavourite(false);
                         addFav.setImageResource(R.drawable.favorite_icon);
                     } else {
+                        saveFavoriteAlbum(album);
                         album.setFavourite(true);
                         addFav.setImageResource(R.drawable.filledheart_icon);
                     }

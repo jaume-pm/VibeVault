@@ -1,5 +1,8 @@
 package com.example.vibevault.songs;
 
+import static com.example.vibevault.firebase.Favorites.deleteFavoriteSong;
+import static com.example.vibevault.firebase.Favorites.saveFavoriteSong;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -154,9 +157,11 @@ public class SongViewSolo extends AppCompatActivity {
             if(id == back.getId()) finish();
             else if(id == addFav.getId()){
                 if(song.isFavourite()){
+                    deleteFavoriteSong(song);
                     song.setFavourite(false);
                     addFav.setImageResource(R.drawable.favorite_icon);
                 } else{
+                    saveFavoriteSong(song);
                     song.setFavourite(true);
                     addFav.setImageResource(R.drawable.filledheart_icon);
                 }
