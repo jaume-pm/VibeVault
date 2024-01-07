@@ -48,6 +48,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         final String id = artist.getId();
 
         if(isInFavoritesArtist(artist.getId())) artist.setFavourite(true);
+        else artist.setFavourite(false);
 
         holder.artistName.setText(artist.getName());
         String profilePicUrl = artist.getArtistProfilePic(1);

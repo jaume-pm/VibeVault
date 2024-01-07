@@ -59,7 +59,12 @@ public class SongViewFragment extends Fragment implements SelectListener {
         super.onCreate(savedInstanceState);
         song_list = new ArrayList<>();
         results = new ArrayList<>();
-        if(!DataHolder.getInstance().getTopSongs().isEmpty()) song_list = DataHolder.getInstance().getTopSongs();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpAdapter(getContext());
     }
 
     @Override
@@ -80,6 +85,7 @@ public class SongViewFragment extends Fragment implements SelectListener {
     }
 
     private void setUpAdapter (Context context){
+        song_list = DataHolder.getInstance().getTopSongs();
         SongViewAdapter songViewAdapter = new SongViewAdapter(context, song_list, SongViewFragment.this);
         recyclerView.setAdapter(songViewAdapter);
     }

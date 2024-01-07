@@ -50,7 +50,6 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        artist_list = DataHolder.getInstance().getTopArtists();
         results = new ArrayList<>();
     }
 
@@ -61,7 +60,11 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
         return inflater.inflate(R.layout.artists_fragment_layout, container, false);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpAdapter(getContext());
+    }
 
     @Override
     public void OnItemClicked(Context context, String name, boolean isFavorite) {
@@ -73,6 +76,7 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
         context.startActivity(intent);
     }
     private void setUpAdapter (Context context){
+        artist_list = DataHolder.getInstance().getTopArtists();
         ArtistViewAdapter artistViewAdapter = new ArtistViewAdapter(context, artist_list, ArtistViewFragment.this);
         recyclerView.setAdapter(artistViewAdapter);
     }
