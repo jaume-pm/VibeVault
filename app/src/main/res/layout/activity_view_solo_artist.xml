@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Nombre"
+            android:text="Sin especificar"
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
 
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="Sin especificar"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -145,7 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:justificationMode="inter_word"
-            android:text="TextView"
+            android:text="Sin especificar"
             android:textColor="@color/vibeVault_light_grey"
             android:textSize="12sp" />
     </LinearLayout>
