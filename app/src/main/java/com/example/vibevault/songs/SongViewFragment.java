@@ -48,76 +48,10 @@ public class SongViewFragment extends Fragment implements SelectListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
-        Context context = view.getContext();
         recyclerView = view.findViewById(R.id.songsRecyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
-
-        if(song_list.isEmpty()) {
-
-            String clientId = "683fff68e09f4b97a5ded29474b883e2";
-            String clientSecret = "a0ab2c15aa684a7287a993468c13ce17";
-
-            String authHeader = "Basic " + Base64.encodeToString((clientId + ":" + clientSecret).getBytes(), Base64.NO_WRAP);
-            String grantType = "client_credentials";
-
-            Retrofit retrofitToken = new Retrofit.Builder()
-                    .baseUrl("https://accounts.spotify.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            Retrofit retrofitAPI = new Retrofit.Builder()
-                    .baseUrl("https://api.spotify.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            SpotifyAPIToken spotifyAPIToken = retrofitToken.create(SpotifyAPIToken.class);
-
-            SpotifyAPIService spotifyAPIServiceSongs = retrofitAPI.create(SpotifyAPIService.class);
-
-            Call<ApiTokenResponse> call = spotifyAPIToken.getToken(grantType, authHeader);
-            call.enqueue(new Callback<ApiTokenResponse>() {
-                @Override
-                public void onResponse(Call<ApiTokenResponse> call, retrofit2.Response<ApiTokenResponse> response) {
-                    if (response.isSuccessful()) {
-                        ApiTokenResponse tokenResponse = response.body();
-                        DataHolder.getInstance().setAccess_token(tokenResponse.getAccess_token());
-                        DataHolder.getInstance().setToken_type(tokenResponse.getToken_type());
-
-                        // Realiza la llamada a la API de Spotify para obtener las canciones
-                        String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
-                        Call<ApiResponseGetSongs> callSongs = spotifyAPIServiceSongs.getAllGlobalSongs(authToken);
-                        callSongs.enqueue(new Callback<ApiResponseGetSongs>() {
-                            @Override
-                            public void onResponse(Call<ApiResponseGetSongs> call, Response<ApiResponseGetSongs> response) {
-                                if (response.isSuccessful() && response.body() != null) {
-                                    ApiResponseGetSongs apiResponseGetSongs = response.body();
-
-                                    for (ApiResponseGetSongs.ItemsSong i : apiResponseGetSongs.getTracks()) {
-                                        song_list.add(i.track);
-                                    }
-
-                                    DataHolder.getInstance().setTopSongs(song_list);
-                                    setUpAdapter(context);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ApiResponseGetSongs> call, Throwable throwable) {
-                                // Manejar error
-                            }
-                        });
-                    } else {
-                        Log.e("API_ERROR", "Llamada para obtener token fallida (DataHolder/tokenCall/else)");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ApiTokenResponse> call, Throwable t) {
-                    Log.e("API_ERROR", "Llamada para obtener token fallida (DataHolder/onFailure) " + t);
-                }
-            });
-        } else setUpAdapter(view.getContext());
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
+        setUpAdapter(view.getContext());
     }
 
     @Override

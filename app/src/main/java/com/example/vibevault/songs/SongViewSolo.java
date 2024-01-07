@@ -2,6 +2,7 @@ package com.example.vibevault.songs;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteSong;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteSong;
+import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -88,12 +89,8 @@ public class SongViewSolo extends AppCompatActivity {
                     .build();
 
             SpotifyAPIService spotifyAPIServiceSongs = retrofitAPI.create(SpotifyAPIService.class);
-
-            // Realiza la llamada a la API de Spotify para obtener las canciones
-            String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
-
             NAME = NAME.replace(" ", "+");
-            spotifyAPIServiceSongs.getSong(NAME, "track", 1, 0, "audio", authToken).enqueue(new Callback<ApiResponseSearchSong>() {
+            spotifyAPIServiceSongs.getSong(NAME, "track", 1, 0, "audio", getAuthToken()).enqueue(new Callback<ApiResponseSearchSong>() {
                 @Override
                 public void onResponse(Call<ApiResponseSearchSong> call, Response<ApiResponseSearchSong> response) {
                     if (response.isSuccessful() && response.body() != null) {

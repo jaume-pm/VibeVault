@@ -21,9 +21,9 @@ public class Favorites {
     private static List<Song> favoriteSongs = new ArrayList<>();
     private static List<Album> favoriteAlbums = new ArrayList<>();
 
-    private static boolean is_favoriteArtistsComplete = true;
+    private static boolean is_favoriteArtistsComplete = false;
     private static boolean is_favoriteAlbumsComplete = false;
-    private static boolean is_favoriteSongsComplete = true;
+    private static boolean is_favoriteSongsComplete = false;
 
     
     public static boolean isInFavoritesAlbums(String id){
@@ -200,15 +200,7 @@ public class Favorites {
     }
 
 
-    public static boolean isFavoriteArtistsComplete() {
-        return is_favoriteArtistsComplete;
-    }
-
-    public static boolean isFavoriteAlbumsComplete() {
-        return is_favoriteAlbumsComplete;
-    }
-
-    public static boolean isFavoriteSongsComplete() {
-        return is_favoriteSongsComplete;
+    public static boolean isFavoritesDownloaded(){
+        return is_favoriteAlbumsComplete && is_favoriteArtistsComplete && is_favoriteSongsComplete;
     }
 }

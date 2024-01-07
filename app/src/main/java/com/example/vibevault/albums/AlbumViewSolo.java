@@ -2,6 +2,7 @@ package com.example.vibevault.albums;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
+import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
 import com.example.vibevault.firebase.Favorites;
 
@@ -74,9 +75,7 @@ public class AlbumViewSolo extends AppCompatActivity {
 
             SpotifyAPIService spotifyAPIServiceAlbum = retrofitAPI.create(SpotifyAPIService.class);
 
-            // Make the call to the Spotify API to get album details
-            String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
-            spotifyAPIServiceAlbum.getAlbum(ID, "ES", authToken).enqueue(new Callback<Album>() {
+            spotifyAPIServiceAlbum.getAlbum(ID, "ES", getAuthToken()).enqueue(new Callback<Album>() {
                 @Override
                 public void onResponse(Call<Album> call, Response<Album> response) {
                     if (response.isSuccessful() && response.body() != null) {

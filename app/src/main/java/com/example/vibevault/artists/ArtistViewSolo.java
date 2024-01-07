@@ -31,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.vibevault.utilities.SpotifyAPI;
 
 public class ArtistViewSolo extends AppCompatActivity {
     private Artist artist;
@@ -73,9 +74,8 @@ public class ArtistViewSolo extends AppCompatActivity {
             SpotifyAPIService spotifyAPIServiceArtists = retrofitAPI.create(SpotifyAPIService.class);
 
             // Realiza la llamada a la API de Spotify para obtener las canciones
-            String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
 
-            spotifyAPIServiceArtists.getArtist(NAME, "artist", 1, 0, "", authToken).enqueue(new Callback<ApiResponseSearchArtist>() {
+            spotifyAPIServiceArtists.getArtist(NAME, "artist", 1, 0, "", SpotifyAPI.getAuthToken()).enqueue(new Callback<ApiResponseSearchArtist>() {
 
                 @Override
                 public void onResponse(Call<ApiResponseSearchArtist> call, Response<ApiResponseSearchArtist> response) {

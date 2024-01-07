@@ -41,71 +41,17 @@ public class ArtistViewFragment extends Fragment implements SelectListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
-        Context context = view.getContext();
         recyclerView = view.findViewById(R.id.artistsRecyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
-
-        if(artist_list.isEmpty()){
-            try {
-                List<Song> s = DataHolder.getInstance().getTopSongs();
-                Set<String> notSame = new HashSet<>();
-                String artistIds = "";
-                for(int i = 0; i < 25; i++){
-                    for(Artist a : s.get(i).getArtists()){
-                        if (!notSame.contains(a.getId())) {
-                            artistIds = artistIds + "," + a.getId();
-                            notSame.add(a.getId());
-                        }
-                    }
-                }
-                artistIds = artistIds.substring(1);
-
-                Retrofit retrofitAPI = new Retrofit.Builder()
-                        .baseUrl("https://api.spotify.com/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                SpotifyAPIService spotifyAPIServiceArtists = retrofitAPI.create(SpotifyAPIService.class);
-                // Realiza la llamada a la API de Spotify para obtener las canciones
-                String authToken = "Bearer " + DataHolder.getInstance().getAccess_token();
-                Call<ApiResponseGetArtists> callArtists = spotifyAPIServiceArtists.getArtists(artistIds, authToken);
-                callArtists.enqueue(new Callback<ApiResponseGetArtists>() {
-                    @Override
-                    public void onResponse(Call<ApiResponseGetArtists> call, Response<ApiResponseGetArtists> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            ApiResponseGetArtists apiResponseGetArtists = response.body();
-
-                            artist_list = apiResponseGetArtists.getArtists();
-
-                            artist_list.sort(Comparator.comparingInt(Artist::getFollowersCount).reversed());
-
-                            DataHolder.getInstance().setTopArtists(artist_list);
-                            setUpAdapter(context);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiResponseGetArtists> call, Throwable throwable) {
-                        Toast.makeText(context, "No va", Toast.LENGTH_SHORT).show();
-                        Log.e("error", throwable.toString());
-                        // Manejar error
-                    }
-                });
-            } catch (Exception e){
-                Toast.makeText(context, "No se ha podido obtener artistas de la API", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else setUpAdapter(view.getContext());
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
+        setUpAdapter(view.getContext());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        artist_list = new ArrayList<>();
+        artist_list = DataHolder.getInstance().getTopArtists();
         results = new ArrayList<>();
-
-        if(!DataHolder.getInstance().getTopArtists().isEmpty()) artist_list = DataHolder.getInstance().getTopArtists();
     }
 
     @Override
