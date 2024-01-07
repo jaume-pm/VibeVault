@@ -14,36 +14,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="25dp">
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:padding="15dp">
 
         <ImageButton
             android:id="@+id/favSongs_btn"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:src="@drawable/fav_songs"
-            android:padding="10dp"
-            android:background="@xml/fav_image_button_animation"/>
+            android:background="@null"
+            android:foreground="@xml/fav_image_button_animation"/>
 
         <ImageButton
             android:id="@+id/favArtists_btn"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:src="@drawable/fav_artists"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:padding="10dp"
-            android:background="@xml/fav_image_button_animation"/>
+            android:background="@null"
+            android:foreground="@xml/fav_image_button_animation"/>
 
         <ImageButton
             android:id="@+id/favAlbums_btn"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:src="@drawable/fav_albums"
-            android:padding="10dp"
-            android:background="@color/vibeVault_dark_grey"
+            android:background="@null"
             android:foreground="@xml/fav_image_button_animation"/>
     </LinearLayout>
 

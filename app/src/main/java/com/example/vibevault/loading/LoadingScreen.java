@@ -20,7 +20,7 @@ public class LoadingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_screen);
         ImageView gif = findViewById(R.id.gifimg);
-        Glide.with(this).load(R.drawable.loading_animation).into(gif);
+        Glide.with(this).load(R.drawable.loading).into(gif);
 
         Favorites.downloadFavoritesAlbums();
         Favorites.downloadFavoritesArtists();
@@ -45,11 +45,11 @@ public class LoadingScreen extends AppCompatActivity {
                     finish();
                 } else {
                     // Schedule the next execution
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, 200);
                 }
             }
         };
 // Initial schedule to start checking after 1 second
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 2000);
     }
 }
