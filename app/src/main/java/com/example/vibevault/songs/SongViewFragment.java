@@ -59,7 +59,6 @@ public class SongViewFragment extends Fragment implements SelectListener {
         super.onCreate(savedInstanceState);
         song_list = new ArrayList<>();
         results = new ArrayList<>();
-        //if(aux) song_list = Favorites.getFavoriteSongs();
         if(!DataHolder.getInstance().getTopSongs().isEmpty()) song_list = DataHolder.getInstance().getTopSongs();
     }
 
@@ -74,8 +73,9 @@ public class SongViewFragment extends Fragment implements SelectListener {
     public void OnItemClicked(Context context, String name, boolean isFavorite) {
         DataHolder.getInstance().setSavedFragment(0);
         Intent intent = new Intent(context, SongViewSolo.class);
-        intent.putExtra("NAME", name);
+        intent.putExtra("ID", name);
         intent.putExtra("isFavorite", isFavorite);
+        intent.putExtra("searchingById", true);
         context.startActivity(intent);
     }
 

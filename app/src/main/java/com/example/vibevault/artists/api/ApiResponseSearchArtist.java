@@ -15,4 +15,9 @@ public class ApiResponseSearchArtist {
     }
 
     public Artist getArtist() { return artists.items.get(0);}
+
+    public boolean resultOk () {
+        if(artists.items.size() == 0) return false;
+        return true;
+    }
 }

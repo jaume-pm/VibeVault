@@ -18,4 +18,9 @@ public class ApiResponseSearchSong {
     }
 
     public Song getTrack() { return tracks.items.get(0);}
+
+    public boolean resultOk () {
+        if(tracks.items.size() == 0) return false;
+        return true;
+    }
 }

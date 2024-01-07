@@ -43,13 +43,12 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
 
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
         Album album = albumList.get(position);
-        final String name = albumList.get(position).getName();
         final String id = albumList.get(position).getId();
 
         if(isInFavoritesAlbums(album.getId())) album.setFavourite(true);
 
 
-        holder.name.setText(albumList.get(position).getName().substring(0, 1).toUpperCase() + albumList.get(position).getName().substring(1));
+        holder.name.setText(albumList.get(position).getName());
         String aux = "";
         for(Artist a : albumList.get(position).getArtists()) {
             aux = aux + a.getName() + ", ";

@@ -45,11 +45,11 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
         Song song = songList.get(position);
-        final String name = songList.get(position).getName();
+        final String id = song.getId();
 
         if(isInFavoritesSongs(song.getId())) song.setFavourite(true);
 
-        holder.name.setText(name);
+        holder.name.setText(songList.get(position).getName());
         String aux = "";
         for(Artist a : songList.get(position).getArtists()) {
             aux = aux + a.getName() + ", ";
@@ -63,7 +63,7 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), name.replace(" ", "+"), song.isFavourite());
+                listener.OnItemClicked(v.getContext(), id, song.isFavourite());
             }
         });
 

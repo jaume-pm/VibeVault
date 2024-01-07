@@ -62,7 +62,7 @@ public class FavouriteViewFragment extends Fragment {
             else { // Albums
                 intent = new Intent(v.getContext(), AlbumViewSolo.class);
             }
-            intent.putExtra("NAME", "Dakiti");
+            intent.putExtra("NAME", "vfgagvagvagaqsgfwsfw");
             startActivity(intent);
         }
     };

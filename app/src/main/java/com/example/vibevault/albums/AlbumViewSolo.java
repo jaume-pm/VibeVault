@@ -4,6 +4,7 @@ import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
+import com.example.vibevault.artists.ArtistViewSolo;
 import com.example.vibevault.firebase.Favorites;
 
 import android.os.Bundle;
@@ -42,7 +43,7 @@ public class AlbumViewSolo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_solo_album); // Use the correct layout resource ID
+        setContentView(R.layout.activity_view_solo_album);
 
         String ID = getIntent().getStringExtra("ID");
         boolean isFavorite = getIntent().getBooleanExtra("isFavorite", false);
@@ -80,22 +81,23 @@ public class AlbumViewSolo extends AppCompatActivity {
                 public void onResponse(Call<Album> call, Response<Album> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         album = response.body();
-
-                        // Now you can work with the 'album' object directly
-                        // For example, access album properties like album.getId(), album.getName(), etc.
-
                         if (album != null) {
-                            Glide.with(AlbumViewSolo.this).load(album.getImage(0)).into(albumCover);
-                            ImageBlur.loadBlurredImage(artistsImg, album.getImage(0), AlbumViewSolo.this, 8.0f);
-                            name.setText(album.getName());
-                            date.setText(album.getRelease_date());
-                            total_tracks.setText(String.valueOf(album.getTotal_tracks()));
-                            type.setText(album.getAlbum_type());
-                            String popuString = "Según Spotify, este álbum tiene una valoración de <b>" + album.getPopularity() + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones del álbum y lo reciente que es.";
-                            popularity.setText(Html.fromHtml(popuString));
-                            album.setFavourite(isFavorite);
-                            if(album.isFavourite()) addFav.setImageResource(R.drawable.filledheart_icon);
-                            else addFav.setImageResource(R.drawable.favorite_icon);
+                            try {
+                                name.setText(album.getName());
+                                date.setText(album.getRelease_date());
+                                total_tracks.setText(String.valueOf(album.getTotal_tracks()));
+                                type.setText(album.getAlbum_type());
+                                String popuString = "Según Spotify, este álbum tiene una valoración de <b>" + album.getPopularity() + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones del álbum y lo reciente que es.";
+                                popularity.setText(Html.fromHtml(popuString));
+                                album.setFavourite(isFavorite);
+                                if (album.isFavourite())
+                                    addFav.setImageResource(R.drawable.filledheart_icon);
+                                else addFav.setImageResource(R.drawable.favorite_icon);
+                                Glide.with(AlbumViewSolo.this).load(album.getImage(0)).into(albumCover);
+                                ImageBlur.loadBlurredImage(artistsImg, album.getImage(0), AlbumViewSolo.this, 8.0f);
+                            } catch (Exception e) {
+                                Toast.makeText(AlbumViewSolo.this, "Información INCOMPLETA para este album", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 }
@@ -106,8 +108,6 @@ public class AlbumViewSolo extends AppCompatActivity {
                     finish();
                 }
             });
-
-
         }
     }
 

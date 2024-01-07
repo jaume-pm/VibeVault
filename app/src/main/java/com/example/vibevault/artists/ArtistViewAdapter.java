@@ -45,20 +45,17 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
         Artist artist = artistList.get(position);
-        final String artistName = artistList.get(position).getName();
+        final String id = artist.getId();
 
         if(isInFavoritesArtist(artist.getId())) artist.setFavourite(true);
 
-        holder.artistName.setText(artistName);
-        String profilePicUrl = artistList.get(position).getArtistProfilePic(1);
+        holder.artistName.setText(artist.getName());
+        String profilePicUrl = artist.getArtistProfilePic(1);
         if (profilePicUrl != null) {
             Glide.with(context).load(profilePicUrl).into(holder.artistImg);
         }
-        /*if (artistList != null && position < artistList.size()) {
-            Glide.with(context).load(artistList.get(position).getArtistProfilePic(1)).into(holder.artistImg);
-        }*/
 
-        holder.artistFollowers.setText("Seguidores: " + String.valueOf(artistList.get(position).getFollowersCount()));
+        holder.artistFollowers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
 
         if (artist.isFavourite()) holder.artistLike.setImageResource(R.drawable.filledheart_icon);
         else holder.artistLike.setImageResource(R.drawable.favorite_icon);
@@ -66,7 +63,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         holder.artistCardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), artistName, artist.isFavourite());
+                listener.OnItemClicked(v.getContext(), id, artist.isFavourite());
             }
         });
 

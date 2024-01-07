@@ -92,13 +92,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 if(selectedFragment == 0) { // Songs
                     intent = new Intent(MainActivity.this, SongViewSolo.class);
+                    intent.putExtra("ID", searchInp.getText().toString());
                 }else if (selectedFragment == 1){ // Artists
                     intent = new Intent(MainActivity.this, ArtistViewSolo.class);
+                    intent.putExtra("ID", searchInp.getText().toString());
                 }
                 else { // Albums
                     intent = new Intent(MainActivity.this, AlbumViewSolo.class);
+                    intent.putExtra("ID", searchInp.getText().toString());
                 }
-                intent.putExtra("NAME", searchInp.getText().toString());
                 startActivity(intent);
                 // Gestionar el click del boton buscar
                 // Se puede usar el selectedFragment para saber en que fragmento estamos

@@ -1,4 +1,4 @@
-package com.example.vibevault.artists;
+package com.example.vibevault.artists.api;
 
 public class Followers {
 

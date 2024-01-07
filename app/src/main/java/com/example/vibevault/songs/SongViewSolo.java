@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.vibevault.artists.Artist;
+import com.example.vibevault.artists.ArtistViewSolo;
 import com.example.vibevault.songs.api.ApiResponseGetSongs;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
@@ -48,21 +50,17 @@ public class SongViewSolo extends AppCompatActivity {
     private ImageButton back, addFav, play;
 
     private MediaPlayer mediaPlayer;
-    private boolean isPlaying = false, isPLayable;
+    private boolean isPlaying = false, isPLayable, isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_solo_song);
-
-        String NAME = getIntent().getStringExtra("NAME");
-        boolean isFavorite = getIntent().getBooleanExtra("isFavorite", false);
-        if (NAME == null || NAME.isEmpty()) {
-            Toast.makeText(this, "No hay resultados", Toast.LENGTH_SHORT).show();
-            finish(); // Cierra esta activity y regresa a MainActivity
-        }
+        String ID = getIntent().getStringExtra("ID");
+        isFavorite = getIntent().getBooleanExtra("isFavorite", false);
+        boolean searchingById = getIntent().getBooleanExtra("searchingById", false);
+        if (ID == null || ID.isEmpty()) { quit("No hay resultados"); }
         else {
-
             name = findViewById(R.id.soloSongName_txt);
             albumTxt = findViewById(R.id.soloSongAlbum_txt);
             artistsTxt = findViewById(R.id.soloSongArtist_txt);
@@ -89,66 +87,96 @@ public class SongViewSolo extends AppCompatActivity {
                     .build();
 
             SpotifyAPIService spotifyAPIServiceSongs = retrofitAPI.create(SpotifyAPIService.class);
-            NAME = NAME.replace(" ", "+");
-            spotifyAPIServiceSongs.getSong(NAME, "track", 1, 0, "audio", getAuthToken()).enqueue(new Callback<ApiResponseSearchSong>() {
-                @Override
-                public void onResponse(Call<ApiResponseSearchSong> call, Response<ApiResponseSearchSong> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        ApiResponseSearchSong apiResponseSearchSong = response.body();
-                        song = apiResponseSearchSong.getTrack();
-                        Glide.with(SongViewSolo.this).load(song.getAlbum().getImage(1)).into(albumCover);
-                        ImageBlur.loadBlurredImage(artistsImg, song.getAlbum().getImage(1), SongViewSolo.this, 8.0f);
-                        name.setText(song.getName());
-                        albumTxt.setText(song.getAlbum().getName());
-                        date.setText(song.getAlbum().getRelease_date());
-                        String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + String.valueOf(song.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
-                        popularity.setText(Html.fromHtml(popuString));
 
-                        song.setFavourite(isFavorite);
-                        if(song.isFavourite()) addFav.setImageResource(R.drawable.filledheart_icon);
-                        else addFav.setImageResource(R.drawable.favorite_icon);
-
-                        String aux = song.getArtists().get(0).getName();
-                        for(int i = 1; i < song.getArtists().size(); i++){
-                            aux = aux + ", " + song.getArtists().get(i).getName();
-                        }
-                        artistsTxt.setText(aux);
-
-                        duration.setText(convertMillisToMinSec(song.getDuration_ms()));
-                        // Falta fer el mateix d'album, pero amb artists
-
-                        try {
-                            if(song.getPreview_url() != null) {
-                                mediaPlayer.setDataSource(song.getPreview_url()); // URL
-                                mediaPlayer.prepareAsync();
-                                isPLayable = true;
-
-                                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                    @Override
-                                    public void onPrepared(MediaPlayer mp) {
-                                        // El MediaPlayer está listo, pero no iniciamos la reproducción aquí
-                                    }
-                                });
-                                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                    @Override
-                                    public void onCompletion(MediaPlayer mp) {
-                                        isPlaying = false;
-                                        play.setImageResource(R.drawable.play_icon); // Restableix el botó
-                                    }
-                                });
-                            } else throw new IOException();
-                        } catch (IOException e) {
-                            isPLayable = false;
+            if(searchingById) {
+                spotifyAPIServiceSongs.getSongByID(ID, getAuthToken()).enqueue(new Callback<Song>() {
+                    @Override
+                    public void onResponse(Call<Song> call, Response<Song> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            Song song = response.body();
+                            if(song != null) {
+                                setUpSongParams(song);
+                            }
+                            else { quit("No hay resultados");}
                         }
                     }
-                }
+                    @Override
+                    public void onFailure(Call<Song> call, Throwable throwable) { quit("No hay resultados"); }
+                });
+            } else {
+                ID = ID.replace(" ", "+");
+                spotifyAPIServiceSongs.getSongByName(ID, "track", 1, 0, "audio", getAuthToken()).enqueue(new Callback<ApiResponseSearchSong>() {
+                    @Override
+                    public void onResponse(Call<ApiResponseSearchSong> call, Response<ApiResponseSearchSong> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            ApiResponseSearchSong apiResponseSearchSong = response.body();
+                            if(apiResponseSearchSong.resultOk()) {
+                                song = apiResponseSearchSong.getTrack();
+                                setUpSongParams(song);
+                            }
+                            else { quit("No hay resultados");}
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ApiResponseSearchSong> call, Throwable throwable) { quit("No hay resultados"); }
+                });
+            }
+        }
+    }
 
-                @Override
-                public void onFailure(Call<ApiResponseSearchSong> call, Throwable throwable) {
-                    Toast.makeText(SongViewSolo.this, "No hay resultados", Toast.LENGTH_SHORT).show();
-                    finish(); // Cierra esta activity y regresa a MainActivity
-                }
-            });
+    void quit (String print) {
+        Toast.makeText(SongViewSolo.this, print, Toast.LENGTH_SHORT).show();
+        finish(); // Cierra esta activity y regresa
+    }
+
+    void setUpSongParams (Song song) {
+        try {
+            name.setText(song.getName());
+            albumTxt.setText(song.getAlbum().getName());
+            date.setText(song.getAlbum().getRelease_date());
+            String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + String.valueOf(song.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
+            popularity.setText(Html.fromHtml(popuString));
+            song.setFavourite(isFavorite);
+            if (song.isFavourite())
+                addFav.setImageResource(R.drawable.filledheart_icon);
+            else addFav.setImageResource(R.drawable.favorite_icon);
+
+            Glide.with(SongViewSolo.this).load(song.getAlbum().getImage(1)).into(albumCover);
+            ImageBlur.loadBlurredImage(artistsImg, song.getAlbum().getImage(1), SongViewSolo.this, 8.0f);
+            String aux = song.getArtists().get(0).getName();
+            for (int i = 1; i < song.getArtists().size(); i++) {
+                aux = aux + ", " + song.getArtists().get(i).getName();
+            }
+            artistsTxt.setText(aux);
+
+            duration.setText(convertMillisToMinSec(song.getDuration_ms()));
+            // Falta fer el mateix d'album, pero amb artists
+
+            try {
+                if (song.getPreview_url() != null) {
+                    mediaPlayer.setDataSource(song.getPreview_url()); // URL
+                    mediaPlayer.prepareAsync();
+                    isPLayable = true;
+
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            // El MediaPlayer está listo, pero no iniciamos la reproducción aquí
+                        }
+                    });
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            isPlaying = false;
+                            play.setImageResource(R.drawable.play_icon); // Restableix el botó
+                        }
+                    });
+                } else throw new IOException();
+            } catch (IOException e) {
+                isPLayable = false;
+            }
+        } catch (Exception e) {
+            quit("Información INCOMPLETA para esta canción");
         }
     }
 
@@ -167,8 +195,6 @@ public class SongViewSolo extends AppCompatActivity {
                     song.setFavourite(true);
                     addFav.setImageResource(R.drawable.filledheart_icon);
                 }
-
-                //Toast.makeText(SongViewSolo.this, "Añadido a favoritos", Toast.LENGTH_SHORT).show();
             }
             else {
                 if(isPLayable){
@@ -185,8 +211,6 @@ public class SongViewSolo extends AppCompatActivity {
             }
         }
     };
-
-
 
     @Override
     protected void onDestroy() {

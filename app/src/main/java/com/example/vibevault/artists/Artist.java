@@ -1,7 +1,6 @@
 package com.example.vibevault.artists;
 
-import androidx.annotation.Nullable;
-
+import com.example.vibevault.artists.api.Followers;
 import com.example.vibevault.utilities.Image;
 
 import java.util.ArrayList;
