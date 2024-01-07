@@ -25,7 +25,8 @@
             android:name=".albums.AlbumViewSolo"
             android:exported="false" />
         <activity
-            android:name=".MainActivity" />
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".loading.LoadingScreen"
             android:exported="true">

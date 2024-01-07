@@ -6,35 +6,45 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="25dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="64dp"
-            android:layout_height="63dp"
-            android:alpha="0.25"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:srcCompat="@drawable/coming_icon" />
+        <ImageButton
+            android:id="@+id/favSongs_btn"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fav_songs"
+            android:padding="10dp"
+            android:background="@xml/fav_image_button_animation"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Coming Soon"
-            android:textColor="@color/vibeVault_light_grey"
-            android:textSize="21sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/favArtists_btn"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fav_artists"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:background="@xml/fav_image_button_animation"/>
 
+        <ImageButton
+            android:id="@+id/favAlbums_btn"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fav_albums"
+            android:padding="10dp"
+            android:background="@color/vibeVault_dark_grey"
+            android:foreground="@xml/fav_image_button_animation"/>
     </LinearLayout>
 
 

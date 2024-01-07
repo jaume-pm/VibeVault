@@ -11,13 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.vibevault.albums.AlbumViewFragment;
 import com.example.vibevault.albums.AlbumViewSolo;
 import com.example.vibevault.artists.ArtistViewFragment;
 import com.example.vibevault.artists.ArtistViewSolo;
-import com.example.vibevault.favourite.FavouriteGlobalViewFragment;
+import com.example.vibevault.favourite.FavouriteViewFragment;
 import com.example.vibevault.songs.SongViewFragment;
 import com.example.vibevault.songs.SongViewSolo;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int selectedFragment;
 
+    LinearLayout searchBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         fragments[0] = new SongViewFragment();
         fragments[1] = new ArtistViewFragment();
         fragments[2] = new AlbumViewFragment();
-        fragments[3] = new FavouriteGlobalViewFragment();
+        fragments[3] = new FavouriteViewFragment();
         //fragments[1] = new ExempleViewFragment();
         setContentView(R.layout.activity_main);
 
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         bottomBarBtn[selectedFragment].setSelected(true);
         bottomBarTxt[selectedFragment].setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
 
+        searchBar = findViewById(R.id.search_bar);
     }
 
     protected View.OnClickListener buttonAction = new View.OnClickListener() {
@@ -99,12 +103,16 @@ public class MainActivity extends AppCompatActivity {
                 // Gestionar el click del boton buscar
                 // Se puede usar el selectedFragment para saber en que fragmento estamos
             } else if(id == bottomBarBtn[0].getId()){
+                searchBar.setVisibility(View.VISIBLE);
                 renderNewFragment (0);
             } else if (id == bottomBarBtn[1].getId()) {
+                searchBar.setVisibility(View.VISIBLE);
                 renderNewFragment (1);
             } else if (id == bottomBarBtn[2].getId()) {
+                searchBar.setVisibility(View.VISIBLE);
                 renderNewFragment (2);
             } else { // Boton de favoritos
+                searchBar.setVisibility(View.GONE);
                 renderNewFragment (3);
             }
         }

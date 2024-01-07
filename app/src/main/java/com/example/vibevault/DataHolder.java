@@ -1,6 +1,7 @@
 package com.example.vibevault;
 
 import com.example.vibevault.artists.Artist;
+import com.example.vibevault.firebase.Favorites;
 import com.example.vibevault.songs.Song;
 import com.example.vibevault.albums.Album;
 
@@ -13,19 +14,17 @@ public class DataHolder {
     private int savedFragment;
     private Song holdedSong;
 
-    private List<Song> topSongs;
+    private List<Song> topSongs, tempSongs;
 
     private List<Artist> topArtists;
 
     private List<Album> topAlbums;
 
-    private List<Song> favSongs;
-
     private String access_token;
 
     private String token_type;
 
-    private List<Song> tempSongs;
+    private boolean weAreInFav;
 
     // Se podria usar para comprobar si el token ha caducado, si es asi hacer un refresh
     // private int expires_in; (de momento no se usa)
@@ -33,7 +32,6 @@ public class DataHolder {
     private DataHolder() {
         savedFragment = 0;
         topSongs = new ArrayList<>();
-        favSongs= new ArrayList<>();
         topArtists = new ArrayList<>();
         topAlbums = new ArrayList<>();
     }
@@ -64,14 +62,6 @@ public class DataHolder {
 
     public void setTopSongs(List<Song> topSongsLoaded) {
         this.topSongs = topSongsLoaded;
-    }
-
-    public List<Song> getFavSongs() {
-        return favSongs;
-    }
-
-    public void setFavSongs(List<Song> favSongsLoaded) {
-        this.favSongs = favSongsLoaded;
     }
 
     public String getAccess_token() {

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vibevault.albums.Album;
 import com.example.vibevault.artists.Artist;
+import com.example.vibevault.firebase.Favorites;
 import com.example.vibevault.songs.api.ApiResponseGetSongs;
 import com.example.vibevault.APIServicesToken.ApiTokenResponse;
 import com.example.vibevault.DataHolder;
@@ -124,8 +125,8 @@ public class SongViewFragment extends Fragment implements SelectListener {
         super.onCreate(savedInstanceState);
         song_list = new ArrayList<>();
         results = new ArrayList<>();
+        //if(aux) song_list = Favorites.getFavoriteSongs();
         if(!DataHolder.getInstance().getTopSongs().isEmpty()) song_list = DataHolder.getInstance().getTopSongs();
-        else if(!DataHolder.getInstance().getTopSongs().isEmpty()) song_list = DataHolder.getInstance().getTopSongs();
     }
 
     @Override

@@ -3,11 +3,13 @@ package com.example.vibevault.loading;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.vibevault.DataHolder;
 import com.example.vibevault.MainActivity;
 import com.example.vibevault.R;
 
@@ -21,12 +23,9 @@ public class LoadingScreen extends AppCompatActivity {
         ImageView gif = findViewById(R.id.gifimg);
         Glide.with(this).load(R.drawable.loading_animation).into(gif);
 
-
         Favorites.downloadFavoritesAlbums();
         Favorites.downloadFavoritesArtists();
         Favorites.downloadFavoritesSongs();
-
-
 
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
@@ -43,6 +42,6 @@ public class LoadingScreen extends AppCompatActivity {
             }
         };
 // Initial schedule to start checking after 1 second
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 2000);
     }
 }
