@@ -47,7 +47,6 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
         // Required empty public constructor
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
         recyclerView = view.findViewById(R.id.albumsRecyclerView);

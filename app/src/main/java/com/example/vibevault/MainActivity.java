@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         fragments[1] = new ArtistViewFragment();
         fragments[2] = new AlbumViewFragment();
         fragments[3] = new FavouriteViewFragment();
-        //fragments[1] = new ExempleViewFragment();
         setContentView(R.layout.activity_main);
 
         selectedFragment = DataHolder.getInstance().getSavedFragment();
