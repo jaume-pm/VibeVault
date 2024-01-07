@@ -42,6 +42,11 @@ public interface SpotifyAPIService {
     // END SONGS //////////////////////////////////////////////////////////////////
 
     // ARTISTS //////////////////////////////////////////////////////////////////
+    @GET("v1/artists") // Pide un album a la api de spotify
+    Call<ApiResponseGetArtists> getArtists(
+            @Query("ids") String artistsIds,
+            @Header("Authorization") String authToken
+    );
     @GET("v1/artists/{id}") // Pide un album a la api de spotify
     Call<Artist> getArtistByID(
             @Path("id") String songId,
