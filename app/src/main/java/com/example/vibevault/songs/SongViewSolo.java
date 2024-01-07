@@ -93,7 +93,7 @@ public class SongViewSolo extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Song> call, Response<Song> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Song song = response.body();
+                            song = response.body();
                             if(song != null) {
                                 setUpSongParams(song);
                             }

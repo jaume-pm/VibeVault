@@ -60,8 +60,12 @@ public interface SpotifyAPIService {
 
 
     // ALBUMS //////////////////////////////////////////////////////////////////
-    @GET("v1/playlists/37i9dQZEVXbJwoKy8qKpHG/tracks/") // El numero es el id de la playlist Top50España
-    Call<ApiResponseGetAlbums> getAllGlobalAlbums(
+    @GET("v1/search") // Pide una canción a la api de spotify
+    Call<ApiResponseSearchAlbum> getAlbumByName(
+            @Query("q") String albumName,
+            @Query("type") String type,
+            @Query("limit") int limit,
+            @Query("offset") int offset,
             @Header("Authorization") String authToken
     );
 

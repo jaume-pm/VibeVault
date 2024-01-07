@@ -52,6 +52,7 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
         recyclerView = view.findViewById(R.id.albumsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
+        album_list = DataHolder.getInstance().getTopAlbums();
         setUpAdapter(view.getContext());
     }
 
@@ -60,8 +61,6 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
         super.onCreate(savedInstanceState);
         album_list = new ArrayList<>();
         results = new ArrayList<>();
-
-        if(!DataHolder.getInstance().getTopAlbums().isEmpty()) album_list = DataHolder.getInstance().getTopAlbums();
     }
 
 
@@ -77,6 +76,7 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
         Intent intent = new Intent(context, AlbumViewSolo.class);
         intent.putExtra("ID", id);
         intent.putExtra("isFavorite", isFavorite);
+        intent.putExtra("searchingById", true);
         context.startActivity(intent);
     }
 

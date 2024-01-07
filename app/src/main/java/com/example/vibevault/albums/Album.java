@@ -13,8 +13,6 @@ public class Album {
     private int total_tracks;
     private List<Artist> artists;
 
-   // private List<Song> songs;
-
     private List<Image> images;
 
     private String release_date;
