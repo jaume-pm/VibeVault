@@ -3,6 +3,7 @@ package com.example.vibevault.interfaces;
 import com.example.vibevault.albums.Album;
 import com.example.vibevault.albums.api.ApiResponseGetAlbums;
 import com.example.vibevault.albums.api.ApiResponseSearchAlbum;
+import com.example.vibevault.artists.Artist;
 import com.example.vibevault.artists.api.ApiResponseGetArtists;
 import com.example.vibevault.artists.api.ApiResponseSearchArtist;
 import com.example.vibevault.songs.Song;
@@ -41,14 +42,14 @@ public interface SpotifyAPIService {
     // END SONGS //////////////////////////////////////////////////////////////////
 
     // ARTISTS //////////////////////////////////////////////////////////////////
-    @GET("v1/artists") // Pide un album a la api de spotify
-    Call<ApiResponseGetArtists> getArtists(
-            @Query("ids") String artistsIds,
+    @GET("v1/artists/{id}") // Pide un album a la api de spotify
+    Call<Artist> getArtistByID(
+            @Path("id") String songId,
             @Header("Authorization") String authToken
     );
 
     @GET("v1/search") // Pide una canción a la api de spotify
-    Call<ApiResponseSearchArtist> getArtist(
+    Call<ApiResponseSearchArtist> getArtistByName(
             @Query("q") String trackName,
             @Query("type") String type,
             @Query("limit") int limit,
