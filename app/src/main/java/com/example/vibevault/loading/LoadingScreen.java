@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.vibevault.MainActivity;
 import com.example.vibevault.R;
-
 import com.example.vibevault.firebase.Favorites;
 import com.example.vibevault.utilities.SpotifyAPI;
 

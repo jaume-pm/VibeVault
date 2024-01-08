@@ -1,14 +1,11 @@
 package com.example.vibevault.artists;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteArtist;
-import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteArtist;
 import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -19,13 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
 import com.example.vibevault.artists.api.ApiResponseSearchArtist;
 import com.example.vibevault.interfaces.SpotifyAPIService;
-import com.example.vibevault.songs.Song;
-import com.example.vibevault.songs.SongViewSolo;
-import com.example.vibevault.songs.api.ApiResponseSearchSong;
 import com.example.vibevault.utilities.ImageBlur;
 
 import retrofit2.Call;
@@ -33,7 +26,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import com.example.vibevault.utilities.SpotifyAPI;
 
 public class ArtistViewSolo extends AppCompatActivity {
     private Artist artist;
@@ -127,8 +119,8 @@ public class ArtistViewSolo extends AppCompatActivity {
             if (artist.isFavourite())
                 addFav.setImageResource(R.drawable.filledheart_icon);
             else addFav.setImageResource(R.drawable.favorite_icon);
-            followers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
-            String popuString = "Según Spotify, este artista tiene una valoración de <b>" + String.valueOf(artist.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
+            followers.setText("Seguidores: " + artist.getFollowersCount());
+            String popuString = "Según Spotify, este artista tiene una valoración de <b>" + artist.getPopularity() + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
             popularity.setText((Html.fromHtml(popuString)));
             Glide.with(ArtistViewSolo.this).load(artist.getArtistProfilePic(1)).into(artistImg);
             ImageBlur.loadBlurredImage(artistBackgroundImg, artist.getArtistProfilePic(1), ArtistViewSolo.this, 8.0f);

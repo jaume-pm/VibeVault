@@ -134,7 +134,7 @@ public class SongViewSolo extends AppCompatActivity {
             name.setText(song.getName());
             albumTxt.setText(song.getAlbum().getName());
             date.setText(song.getAlbum().getRelease_date());
-            String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + String.valueOf(song.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
+            String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + song.getPopularity() + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
             popularity.setText(Html.fromHtml(popuString));
             song.setFavourite(isFavorite);
             if (song.isFavourite())

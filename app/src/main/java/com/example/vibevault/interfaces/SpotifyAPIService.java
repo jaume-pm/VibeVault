@@ -1,7 +1,6 @@
 package com.example.vibevault.interfaces;
 
 import com.example.vibevault.albums.Album;
-import com.example.vibevault.albums.api.ApiResponseGetAlbums;
 import com.example.vibevault.albums.api.ApiResponseSearchAlbum;
 import com.example.vibevault.artists.Artist;
 import com.example.vibevault.artists.api.ApiResponseGetArtists;

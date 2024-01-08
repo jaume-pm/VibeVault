@@ -24,11 +24,11 @@ import java.util.List;
 
 public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
 
-    private Context context;
+    private final Context context;
 
-    private List<Song> songList;
+    private final List<Song> songList;
 
-    private SelectListener listener;
+    private final SelectListener listener;
 
     public SongViewAdapter(Context context, List<Song> songList, SelectListener listener) {
         this.context = context;
@@ -47,8 +47,7 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
         Song song = songList.get(position);
         final String id = song.getId();
 
-        if(isInFavoritesSongs(song.getId())) song.setFavourite(true);
-        else song.setFavourite(false);
+        song.setFavourite(isInFavoritesSongs(song.getId()));
 
         holder.name.setText(songList.get(position).getName());
         String aux = "";

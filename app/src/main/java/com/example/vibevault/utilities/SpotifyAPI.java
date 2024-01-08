@@ -27,18 +27,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SpotifyAPI {
     private static boolean isSongsDownloaded = false, isArtistsDownloaded = false, isAlbumsDownloaded = false;
-    private static String clientId = "683fff68e09f4b97a5ded29474b883e2";
-    private static String clientSecret = "a0ab2c15aa684a7287a993468c13ce17";
+    private static final String clientId = "683fff68e09f4b97a5ded29474b883e2";
+    private static final String clientSecret = "a0ab2c15aa684a7287a993468c13ce17";
 
-    private static String authHeader = "Basic " + Base64.encodeToString((clientId + ":" + clientSecret).getBytes(), Base64.NO_WRAP);
-    private static String grantType = "client_credentials";
+    private static final String authHeader = "Basic " + Base64.encodeToString((clientId + ":" + clientSecret).getBytes(), Base64.NO_WRAP);
+    private static final String grantType = "client_credentials";
 
-    private static Retrofit retrofitToken = new Retrofit.Builder()
+    private static final Retrofit retrofitToken = new Retrofit.Builder()
             .baseUrl("https://accounts.spotify.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    private static Retrofit retrofitAPI = new Retrofit.Builder()
+    private static final Retrofit retrofitAPI = new Retrofit.Builder()
             .baseUrl("https://api.spotify.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();

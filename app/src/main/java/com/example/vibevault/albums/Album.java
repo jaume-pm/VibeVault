@@ -1,7 +1,6 @@
 package com.example.vibevault.albums;
 
 import com.example.vibevault.artists.Artist;
-import com.example.vibevault.songs.Song;
 import com.example.vibevault.utilities.Image;
 
 import java.util.List;

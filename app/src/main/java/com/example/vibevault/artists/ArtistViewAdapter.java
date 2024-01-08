@@ -1,16 +1,13 @@
 package com.example.vibevault.artists;
 
-import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteArtist;
-import static com.example.vibevault.firebase.Favorites.isInFavoritesAlbums;
 import static com.example.vibevault.firebase.Favorites.isInFavoritesArtist;
-import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteArtist;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,17 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SelectListener;
-import com.example.vibevault.songs.Song;
 
 import java.util.List;
-import java.util.Locale;
 
 public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
-    private Context context;
+    private final Context context;
 
-    private List<Artist> artistList;
+    private final List<Artist> artistList;
 
-    private SelectListener listener;
+    private final SelectListener listener;
 
     public ArtistViewAdapter(Context context, List<Artist> artistList, SelectListener listener) {
         this.context = context;
@@ -47,8 +42,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
         Artist artist = artistList.get(position);
         final String id = artist.getId();
 
-        if(isInFavoritesArtist(artist.getId())) artist.setFavourite(true);
-        else artist.setFavourite(false);
+        artist.setFavourite(isInFavoritesArtist(artist.getId()));
 
         holder.artistName.setText(artist.getName());
         String profilePicUrl = artist.getArtistProfilePic(1);
@@ -56,7 +50,7 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
             Glide.with(context).load(profilePicUrl).into(holder.artistImg);
         }
 
-        holder.artistFollowers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
+        holder.artistFollowers.setText("Seguidores: " + artist.getFollowersCount());
 
         if (artist.isFavourite()) holder.artistLike.setImageResource(R.drawable.filledheart_icon);
         else holder.artistLike.setImageResource(R.drawable.favorite_icon);

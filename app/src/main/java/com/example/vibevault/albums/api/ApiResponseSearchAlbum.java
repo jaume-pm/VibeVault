@@ -18,10 +18,7 @@ public class ApiResponseSearchAlbum {
     }
 
     public boolean resultOk() {
-        if (albums != null && albums.items != null && !albums.items.isEmpty()) {
-            return true;
-        }
-        return false;
+        return albums != null && albums.items != null && !albums.items.isEmpty();
     }
 
     public static class Albums {

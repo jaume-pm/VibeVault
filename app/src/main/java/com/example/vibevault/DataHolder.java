@@ -1,9 +1,8 @@
 package com.example.vibevault;
 
-import com.example.vibevault.artists.Artist;
-import com.example.vibevault.firebase.Favorites;
-import com.example.vibevault.songs.Song;
 import com.example.vibevault.albums.Album;
+import com.example.vibevault.artists.Artist;
+import com.example.vibevault.songs.Song;
 
 import java.util.ArrayList;
 import java.util.List;

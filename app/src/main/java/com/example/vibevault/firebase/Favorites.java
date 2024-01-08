@@ -15,7 +15,7 @@ import java.util.List;
 public class Favorites {
 
     //For this class to be work correctly the methods getFavoriteX must be called just once.
-    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private static List<Artist> favoriteArtists = new ArrayList<>();
     private static List<Song> favoriteSongs = new ArrayList<>();

@@ -1,8 +1,6 @@
 package com.example.vibevault.artists.api;
 
 import com.example.vibevault.artists.Artist;
-import com.example.vibevault.songs.Song;
-import com.example.vibevault.songs.api.ApiResponseGetSongs;
 
 import java.util.List;
 

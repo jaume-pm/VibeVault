@@ -3,8 +3,6 @@ package com.example.vibevault.favourite;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,24 +11,8 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.example.vibevault.APIServicesToken.ApiTokenResponse;
-import com.example.vibevault.DataHolder;
-import com.example.vibevault.MainActivity;
 import com.example.vibevault.R;
-import com.example.vibevault.albums.AlbumViewSolo;
-import com.example.vibevault.artists.ArtistViewSolo;
-import com.example.vibevault.interfaces.SpotifyAPIService;
-import com.example.vibevault.interfaces.SpotifyAPIToken;
-import com.example.vibevault.songs.SongViewSolo;
-import com.example.vibevault.songs.api.ApiResponseGetSongs;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FavouriteViewFragment extends Fragment {
     private ImageButton songs, artists, albums;

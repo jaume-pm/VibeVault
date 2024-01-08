@@ -14,20 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.vibevault.R;
+import com.example.vibevault.artists.Artist;
 import com.example.vibevault.interfaces.SelectListener;
-import com.example.vibevault.albums.Album;
-import com.example.vibevault.albums.AlbumViewHolder;
-import com.example.vibevault.songs.SongViewHolder;
 
 import java.util.List;
-import com.example.vibevault.artists.Artist;
 
 public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
-    private Context context;
+    private final Context context;
 
-    private List<Album> albumList;
+    private final List<Album> albumList;
 
-    private SelectListener listener;
+    private final SelectListener listener;
 
     public AlbumViewAdapter(Context context, List<Album> albumList, SelectListener listener) {
         this.context = context;
@@ -45,8 +42,7 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
         Album album = albumList.get(position);
         final String id = albumList.get(position).getId();
 
-        if(isInFavoritesAlbums(album.getId())) album.setFavourite(true);
-        else album.setFavourite(false);
+        album.setFavourite(isInFavoritesAlbums(album.getId()));
 
 
         holder.name.setText(albumList.get(position).getName());

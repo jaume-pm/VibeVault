@@ -1,5 +1,14 @@
 package com.example.vibevault;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -7,17 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.vibevault.albums.AlbumViewFragment;
 import com.example.vibevault.albums.AlbumViewSolo;
@@ -67,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         bottomBarBtn = new ImageButton[4];
         bottomBarTxt = new TextView[4];
 
-        searchBtn = (ImageButton) findViewById(R.id.main_search_btn);
-        bottomBarBtn[0] = (ImageButton) findViewById(R.id.main_songs_btn);
-        bottomBarBtn[1] = (ImageButton) findViewById(R.id.main_artists_btn);
-        bottomBarBtn[2] = (ImageButton) findViewById(R.id.main_albums_btn);
-        bottomBarBtn[3] = (ImageButton) findViewById(R.id.main_fav_btn);
+        searchBtn = findViewById(R.id.main_search_btn);
+        bottomBarBtn[0] = findViewById(R.id.main_songs_btn);
+        bottomBarBtn[1] = findViewById(R.id.main_artists_btn);
+        bottomBarBtn[2] = findViewById(R.id.main_albums_btn);
+        bottomBarBtn[3] = findViewById(R.id.main_fav_btn);
 
         searchBtn.setOnClickListener(buttonAction);
         bottomBarBtn[0].setOnClickListener(buttonAction);
@@ -79,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
         bottomBarBtn[2].setOnClickListener(buttonAction);
         bottomBarBtn[3].setOnClickListener(buttonAction);
 
-        bottomBarTxt[0] = (TextView) findViewById(R.id.main_songs_txt);
-        bottomBarTxt[1] = (TextView) findViewById(R.id.main_artists_txt);
-        bottomBarTxt[2] = (TextView) findViewById(R.id.main_albums_txt);
-        bottomBarTxt[3] = (TextView) findViewById(R.id.main_fav_txt);
+        bottomBarTxt[0] = findViewById(R.id.main_songs_txt);
+        bottomBarTxt[1] = findViewById(R.id.main_artists_txt);
+        bottomBarTxt[2] = findViewById(R.id.main_albums_txt);
+        bottomBarTxt[3] = findViewById(R.id.main_fav_txt);
 
-        searchInp = (EditText) findViewById(R.id.main_search_inp);
+        searchInp = findViewById(R.id.main_search_inp);
 
         bottomBarBtn[selectedFragment].setSelected(true);
         bottomBarTxt[selectedFragment].setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white));
