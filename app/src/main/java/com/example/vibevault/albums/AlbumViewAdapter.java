@@ -43,46 +43,53 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
 
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
         Album album = albumList.get(position);
-        final String id = albumList.get(position).getId();
+        if(albumList.size() - 1 > position) {
+            final String id = albumList.get(position).getId();
 
-        if(isInFavoritesAlbums(album.getId())) album.setFavourite(true);
-        else album.setFavourite(false);
+            if (isInFavoritesAlbums(album.getId())) album.setFavourite(true);
+            else album.setFavourite(false);
 
 
-        holder.name.setText(albumList.get(position).getName());
-        String aux = "";
-        for(Artist a : albumList.get(position).getArtists()) {
-            aux = aux + a.getName() + ", ";
-        }
-        if (album.isFavourite()) holder.like.setImageResource(R.drawable.filledheart_icon);
-        else holder.like.setImageResource(R.drawable.favorite_icon);
-
-        holder.artists.setText(aux.substring(0, aux.length() - 2));
-        Glide.with(context).load(albumList.get(position).getImage(2)).into(holder.albumImg);
-        //holder.like.setBackground();
-
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), id, album.isFavourite());
+            holder.name.setText(albumList.get(position).getName());
+            String aux = "";
+            for (Artist a : albumList.get(position).getArtists()) {
+                aux = aux + a.getName() + ", ";
             }
-        });
+            if (album.isFavourite()) holder.like.setImageResource(R.drawable.filledheart_icon);
+            else holder.like.setImageResource(R.drawable.favorite_icon);
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (album.isFavourite()) {
-                    deleteFavoriteAlbum(album);
-                    album.setFavourite(false);
-                    holder.like.setImageResource(R.drawable.favorite_icon);
-                } else {
-                    saveFavoriteAlbum(album);
-                    album.setFavourite(true);
-                    holder.like.setImageResource(R.drawable.filledheart_icon);
+            holder.artists.setText(aux.substring(0, aux.length() - 2));
+            Glide.with(context).load(albumList.get(position).getImage(2)).into(holder.albumImg);
+            //holder.like.setBackground();
+
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.OnItemClicked(v.getContext(), id, album.isFavourite());
                 }
+            });
 
-            }
-        });
+            holder.like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (album.isFavourite()) {
+                        deleteFavoriteAlbum(album);
+                        album.setFavourite(false);
+                        holder.like.setImageResource(R.drawable.favorite_icon);
+                    } else {
+                        saveFavoriteAlbum(album);
+                        album.setFavourite(true);
+                        holder.like.setImageResource(R.drawable.filledheart_icon);
+                    }
+
+                }
+            });
+        } else  {
+            holder.name.setText("");
+            holder.artists.setText("");
+            holder.albumImg.setVisibility(View.INVISIBLE);
+            holder.like.setVisibility(View.INVISIBLE);
+        }
     }
 
 

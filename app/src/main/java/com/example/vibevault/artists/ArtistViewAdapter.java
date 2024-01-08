@@ -45,44 +45,52 @@ public class ArtistViewAdapter extends RecyclerView.Adapter<ArtistViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
         Artist artist = artistList.get(position);
-        final String id = artist.getId();
+        if(artistList.size() - 1 > position) {
+            final String id = artist.getId();
 
-        if(isInFavoritesArtist(artist.getId())) artist.setFavourite(true);
-        else artist.setFavourite(false);
+            if (isInFavoritesArtist(artist.getId())) artist.setFavourite(true);
+            else artist.setFavourite(false);
 
-        holder.artistName.setText(artist.getName());
-        String profilePicUrl = artist.getArtistProfilePic(1);
-        if (profilePicUrl != null) {
-            Glide.with(context).load(profilePicUrl).into(holder.artistImg);
-        }
-
-        holder.artistFollowers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
-
-        if (artist.isFavourite()) holder.artistLike.setImageResource(R.drawable.filledheart_icon);
-        else holder.artistLike.setImageResource(R.drawable.favorite_icon);
-
-        holder.artistCardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.OnItemClicked(v.getContext(), id, artist.isFavourite());
+            holder.artistName.setText(artist.getName());
+            String profilePicUrl = artist.getArtistProfilePic(1);
+            if (profilePicUrl != null) {
+                Glide.with(context).load(profilePicUrl).into(holder.artistImg);
             }
-        });
 
-        holder.artistLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (artist.isFavourite()) {
-                    deleteFavoriteArtist(artist);
-                    artist.setFavourite(false);
-                    holder.artistLike.setImageResource(R.drawable.favorite_icon);
-                } else {
-                    saveFavoriteArtist(artist);
-                    artist.setFavourite(true);
-                    holder.artistLike.setImageResource(R.drawable.filledheart_icon);
+            holder.artistFollowers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
+
+            if (artist.isFavourite())
+                holder.artistLike.setImageResource(R.drawable.filledheart_icon);
+            else holder.artistLike.setImageResource(R.drawable.favorite_icon);
+
+            holder.artistCardview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.OnItemClicked(v.getContext(), id, artist.isFavourite());
                 }
+            });
 
-            }
-        });
+            holder.artistLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (artist.isFavourite()) {
+                        deleteFavoriteArtist(artist);
+                        artist.setFavourite(false);
+                        holder.artistLike.setImageResource(R.drawable.favorite_icon);
+                    } else {
+                        saveFavoriteArtist(artist);
+                        artist.setFavourite(true);
+                        holder.artistLike.setImageResource(R.drawable.filledheart_icon);
+                    }
+
+                }
+            });
+        } else {
+            holder.artistName.setText("");
+            holder.artistFollowers.setText("");
+            holder.artistImg.setVisibility(View.INVISIBLE);
+            holder.artistLike.setVisibility(View.INVISIBLE);
+        }
 
     }
 

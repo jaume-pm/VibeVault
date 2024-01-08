@@ -24,7 +24,7 @@
             android:layout_marginStart="6dp"
             android:text="Tus - Favoritas"
             android:textColor="@color/white"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
