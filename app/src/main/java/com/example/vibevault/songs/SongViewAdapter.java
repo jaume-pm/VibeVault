@@ -8,7 +8,6 @@ import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteSong;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,52 +45,44 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
         Song song = songList.get(position);
-        if(songList.size() - 1 > position) {
-            final String id = song.getId();
+        final String id = song.getId();
 
-            if(isInFavoritesSongs(song.getId())) song.setFavourite(true);
-            else song.setFavourite(false);
+        if(isInFavoritesSongs(song.getId())) song.setFavourite(true);
+        else song.setFavourite(false);
 
-            holder.name.setText(songList.get(position).getName());
-            String aux = "";
-            for(Artist a : songList.get(position).getArtists()) {
-                aux = aux + a.getName() + ", ";
-            }
-            holder.artists.setText(aux.substring(0, aux.length() - 2));
-            Glide.with(context).load(songList.get(position).getAlbumCover(2)).into(holder.songImg);
-
-            if (song.isFavourite()) holder.like.setImageResource(R.drawable.filledheart_icon);
-            else holder.like.setImageResource(R.drawable.favorite_icon);
-
-            holder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.OnItemClicked(v.getContext(), id, song.isFavourite());
-                }
-            });
-
-            holder.like.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (song.isFavourite()) {
-                        deleteFavoriteSong(song);
-                        song.setFavourite(false);
-                        holder.like.setImageResource(R.drawable.favorite_icon);
-                    } else {
-                        saveFavoriteSong(song);
-                        song.setFavourite(true);
-                        holder.like.setImageResource(R.drawable.filledheart_icon);
-                    }
-
-                }
-            });
-        } else {
-            holder.name.setText("");
-            holder.artists.setText("");
-            holder.songImg.setVisibility(View.INVISIBLE);
-            holder.like.setVisibility(View.INVISIBLE);
+        holder.name.setText(songList.get(position).getName());
+        String aux = "";
+        for(Artist a : songList.get(position).getArtists()) {
+            aux = aux + a.getName() + ", ";
         }
+        holder.artists.setText(aux.substring(0, aux.length() - 2));
+        Glide.with(context).load(songList.get(position).getAlbumCover(2)).into(holder.songImg);
 
+        if (song.isFavourite()) holder.like.setImageResource(R.drawable.filledheart_icon);
+        else holder.like.setImageResource(R.drawable.favorite_icon);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.OnItemClicked(v.getContext(), id, song.isFavourite());
+            }
+        });
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (song.isFavourite()) {
+                    deleteFavoriteSong(song);
+                    song.setFavourite(false);
+                    holder.like.setImageResource(R.drawable.favorite_icon);
+                } else {
+                    saveFavoriteSong(song);
+                    song.setFavourite(true);
+                    holder.like.setImageResource(R.drawable.filledheart_icon);
+                }
+
+            }
+        });
     }
 
     @Override
