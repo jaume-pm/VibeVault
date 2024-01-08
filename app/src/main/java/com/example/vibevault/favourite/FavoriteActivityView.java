@@ -110,6 +110,12 @@ public class FavoriteActivityView extends AppCompatActivity implements SelectLis
         context.startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpAdapter();
+    }
+
     View.OnClickListener buttonAction = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
