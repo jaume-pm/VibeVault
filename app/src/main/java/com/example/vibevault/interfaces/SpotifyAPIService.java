@@ -47,9 +47,9 @@ public interface SpotifyAPIService {
             @Query("ids") String artistsIds,
             @Header("Authorization") String authToken
     );
-    @GET("v1/artists/{id}") // Pide un album a la api de spotify
+    @GET("v1/artists/{id}") // Pide un artist a la api de spotify
     Call<Artist> getArtistByID(
-            @Path("id") String songId,
+            @Path("id") String artistId,
             @Header("Authorization") String authToken
     );
 
@@ -59,7 +59,6 @@ public interface SpotifyAPIService {
             @Query("type") String type,
             @Query("limit") int limit,
             @Query("offset") int offset,
-            @Query("include_external") String includeExternal,
             @Header("Authorization") String authToken
     );
     // END ARTISTS //////////////////////////////////////////////////////////////////
@@ -77,7 +76,7 @@ public interface SpotifyAPIService {
 
     @GET("v1/albums/{id}") // Define the endpoint for retrieving an album by its ID
     Call<Album> getAlbum(
-            @Path("id") String albumId, // Use @Path to specify the album ID as a path parameter
+            @Path("id") String albumId,
             @Query("market") String market,
             @Header("Authorization") String authToken
     );

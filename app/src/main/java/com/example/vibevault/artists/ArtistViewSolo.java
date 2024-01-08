@@ -77,7 +77,7 @@ public class ArtistViewSolo extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Artist> call, Response<Artist> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Artist artist = response.body();
+                            artist = response.body();
                             if(artist != null) {
                                 setUpArtistsParams(artist);
                             }
@@ -89,7 +89,7 @@ public class ArtistViewSolo extends AppCompatActivity {
                 });
             } else {
                 ID = ID.replace(" ", "+");
-                spotifyAPIServiceArtists.getArtistByName(ID, "artist", 1, 0, "", getAuthToken()).enqueue(new Callback<ApiResponseSearchArtist>() {
+                spotifyAPIServiceArtists.getArtistByName(ID, "artist", 1, 0, getAuthToken()).enqueue(new Callback<ApiResponseSearchArtist>() {
                     @Override
                     public void onResponse(Call<ApiResponseSearchArtist> call, Response<ApiResponseSearchArtist> response) {
                         if (response.isSuccessful() && response.body() != null) {
@@ -102,32 +102,6 @@ public class ArtistViewSolo extends AppCompatActivity {
                             }
                         }
                     }
-
-                                /*try {
-                                    name.setText(artist.getName());
-                                    artist.setFavourite(isFavorite);
-                                    if (artist.isFavourite())
-                                        addFav.setImageResource(R.drawable.filledheart_icon);
-                                    else addFav.setImageResource(R.drawable.favorite_icon);
-                                    followers.setText("Seguidores: " + String.valueOf(artist.getFollowersCount()));
-                                    String popuString = "Según Spotify, este artista tiene una valoración de <b>" + String.valueOf(artist.getPopularity()) + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
-                                    popularity.setText((Html.fromHtml(popuString)));
-                                    Glide.with(ArtistViewSolo.this).load(artist.getArtistProfilePic(1)).into(artistImg);
-                                    ImageBlur.loadBlurredImage(artistBackgroundImg, artist.getArtistProfilePic(1), ArtistViewSolo.this, 8.0f);
-                                    String aux = artist.getGenres().get(0).toUpperCase();
-                                    for (int i = 1; i < artist.getGenres().size(); i++) {
-                                        aux = aux + ", " + artist.getGenres().get(i).toUpperCase();
-                                    }
-                                    genres.setText(aux);
-                                } catch (Exception e) {
-                                    Toast.makeText(ArtistViewSolo.this, "Información INCOMPLETA para este artista", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(ArtistViewSolo.this, "No hay resultados", Toast.LENGTH_SHORT).show();
-                                finish(); // Cierra esta activity y regresa a MainActivity
-                            }
-                        }
-                    }*/
 
                     @Override
                     public void onFailure(Call<ApiResponseSearchArtist> call, Throwable t) {
