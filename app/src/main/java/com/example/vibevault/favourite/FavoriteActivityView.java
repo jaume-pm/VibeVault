@@ -31,6 +31,8 @@ public class FavoriteActivityView extends AppCompatActivity implements SelectLis
 
     private int item;
 
+    private TextView favTxt;
+
 
     public FavoriteActivityView() {
     }
@@ -43,20 +45,26 @@ public class FavoriteActivityView extends AppCompatActivity implements SelectLis
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(FavoriteActivityView.this, 1));
         item = getIntent().getIntExtra("ITEM", 0);
+        favTxt = findViewById(R.id.favorite_txt);
         setUpAdapter();
 
         back = findViewById(R.id.favGoBack_btn);
         back.setOnClickListener(buttonAction);
+
+
     }
 
     private void setUpAdapter (){
         if (item == 0) {
+            favTxt.setText("Tus Canciones Favoritas");
             SongViewAdapter songViewAdapter = new SongViewAdapter(FavoriteActivityView.this, Favorites.getFavoriteSongs(), FavoriteActivityView.this);
             recyclerView.setAdapter(songViewAdapter);
         } else if (item == 1) {
+            favTxt.setText("Tus Artistas Favoritos");
             ArtistViewAdapter artistViewAdapter = new ArtistViewAdapter(FavoriteActivityView.this, Favorites.getFavoriteArtists(), FavoriteActivityView.this);
             recyclerView.setAdapter(artistViewAdapter);
         } else { // Albums
+            favTxt.setText("Tus Albums Favoritos");
             AlbumViewAdapter albumViewAdapter = new AlbumViewAdapter(FavoriteActivityView.this, Favorites.getFavoriteAlbums(), FavoriteActivityView.this);
             recyclerView.setAdapter(albumViewAdapter);
         }
