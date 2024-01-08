@@ -8,45 +8,44 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:padding="15dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/favSongs_btn"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/fav_songs"
             android:background="@null"
-            android:foreground="@xml/fav_image_button_animation"/>
+            android:foreground="@xml/fav_image_button_animation"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fav_songs" />
 
         <ImageButton
             android:id="@+id/favArtists_btn"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/fav_artists"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@null"
-            android:foreground="@xml/fav_image_button_animation"/>
+            android:foreground="@xml/fav_image_button_animation"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fav_artists" />
 
         <ImageButton
             android:id="@+id/favAlbums_btn"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/fav_albums"
             android:background="@null"
-            android:foreground="@xml/fav_image_button_animation"/>
+            android:foreground="@xml/fav_image_button_animation"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fav_albums" />
     </LinearLayout>
 
 

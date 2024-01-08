@@ -55,14 +55,16 @@ public class FavouriteViewFragment extends Fragment {
             int id = v.getId();
             Intent intent;
             if(id == songs.getId()) { // Songs
-                intent = new Intent(v.getContext(), SongViewSolo.class);
+                intent = new Intent(v.getContext(), FavoriteActivityView.class);
+                intent.putExtra("ITEM", 0);
             }else if (id == artists.getId()){ // Artists
-                intent = new Intent(v.getContext(), ArtistViewSolo.class);
+                intent = new Intent(v.getContext(), FavoriteActivityView.class);
+                intent.putExtra("ITEM", 1);
             }
             else { // Albums
-                intent = new Intent(v.getContext(), AlbumViewSolo.class);
+                intent = new Intent(v.getContext(), FavoriteActivityView.class);
+                intent.putExtra("ITEM", 2);
             }
-            intent.putExtra("NAME", "vfgagvagvagaqsgfwsfw");
             startActivity(intent);
         }
     };

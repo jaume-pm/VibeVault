@@ -28,6 +28,9 @@
             android:name=".MainActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity
+            android:name=".favourite.FavoriteActivityView"
+            android:exported="false" />
+        <activity
             android:name=".loading.LoadingScreen"
             android:exported="true">
             <intent-filter>
