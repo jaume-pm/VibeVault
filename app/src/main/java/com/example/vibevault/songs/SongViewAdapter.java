@@ -1,10 +1,7 @@
 package com.example.vibevault.songs;
 
-import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteSong;
-import static com.example.vibevault.firebase.Favorites.isInFavoritesAlbums;
 import static com.example.vibevault.firebase.Favorites.isInFavoritesSongs;
-import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteSong;
 
 import android.content.Context;

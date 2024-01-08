@@ -4,28 +4,18 @@ import static com.example.vibevault.firebase.Favorites.deleteFavoriteSong;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteSong;
 import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
-import com.example.vibevault.artists.Artist;
-import com.example.vibevault.artists.ArtistViewSolo;
-import com.example.vibevault.songs.api.ApiResponseGetSongs;
-import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
 import com.example.vibevault.interfaces.SpotifyAPIService;
 import com.example.vibevault.songs.api.ApiResponseSearchSong;

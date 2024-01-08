@@ -236,7 +236,6 @@ public class Favorites {
         return favoriteArtists;
     }
 
-
     public static boolean isFavoritesDownloaded(){
         return is_favoriteAlbumsComplete && is_favoriteArtistsComplete && is_favoriteSongsComplete;
     }
