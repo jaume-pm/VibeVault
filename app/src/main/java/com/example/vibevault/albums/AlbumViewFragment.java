@@ -2,8 +2,6 @@ package com.example.vibevault.albums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,26 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vibevault.APIServicesToken.ApiTokenResponse;
 import com.example.vibevault.DataHolder;
 import com.example.vibevault.R;
-import com.example.vibevault.albums.api.ApiResponseGetAlbums;
 import com.example.vibevault.interfaces.SelectListener;
-import com.example.vibevault.interfaces.SpotifyAPIService;
-import com.example.vibevault.interfaces.SpotifyAPIToken;
-import com.example.vibevault.songs.api.ApiResponseGetSongs;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AlbumViewFragment extends Fragment implements SelectListener {
 
@@ -60,8 +44,12 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
         super.onCreate(savedInstanceState);
         album_list = new ArrayList<>();
         results = new ArrayList<>();
+    }
 
-        if(!DataHolder.getInstance().getTopAlbums().isEmpty()) album_list = DataHolder.getInstance().getTopAlbums();
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpAdapter(getContext());
     }
 
 
@@ -77,10 +65,12 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
         Intent intent = new Intent(context, AlbumViewSolo.class);
         intent.putExtra("ID", id);
         intent.putExtra("isFavorite", isFavorite);
+        intent.putExtra("searchingById", true);
         context.startActivity(intent);
     }
 
     private void setUpAdapter (Context context){
+        album_list = DataHolder.getInstance().getTopAlbums();
         AlbumViewAdapter albumViewAdapter = new AlbumViewAdapter(context, album_list, AlbumViewFragment.this);
         recyclerView.setAdapter(albumViewAdapter);
     }

@@ -77,66 +77,103 @@ public class Favorites {
     }
 
     public static void deleteFavoriteArtist(Artist artist) {
-        favoriteArtists.remove(artist);
-        db.collection("artists")
-                .whereEqualTo("id", artist.getId()) // Assuming "id" is the field storing the artist name
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                        db.collection("artists")
-                                .document(documentSnapshot.getId()) // Get the document ID
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        // Handle success
-                                    }
-                                });
-                    }
-                });
+        String artistId = artist.getId(); // Get the ID from the provided artist
+        Artist artistToRemove = null;
+        for (Artist favArtist : favoriteArtists) {
+            if (favArtist.getId().equals(artistId)) {
+                artistToRemove = favArtist;
+                break; // Found the artist, exit the loop
+            }
+        }
+
+        if (artistToRemove != null) {
+            favoriteArtists.remove(artistToRemove);
+            // Now you can delete the artist from Firestore if needed
+            db.collection("artists")
+                    .whereEqualTo("id", artistId) // Assuming "id" is the field storing the artist ID
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                            db.collection("artists")
+                                    .document(documentSnapshot.getId()) // Get the document ID
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // Handle success
+                                        }
+                                    });
+                        }
+                    });
+        }
     }
 
     public static void deleteFavoriteAlbum(Album album) {
-        favoriteAlbums.remove(album);
-        db.collection("albums")
-                .whereEqualTo("id", album.getId()) // Assuming "id" is the field storing the album name
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                        db.collection("albums")
-                                .document(documentSnapshot.getId()) // Get the document ID
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        // Handle success
-                                    }
-                                });
-                    }
-                });
+        String albumId = album.getId(); // Get the ID from the provided album
+        Album albumToRemove = null;
+        for (Album favAlbum : favoriteAlbums) {
+            if (favAlbum.getId().equals(albumId)) {
+                albumToRemove = favAlbum;
+                break; // Found the album, exit the loop
+            }
+        }
+
+        if (albumToRemove != null) {
+            favoriteAlbums.remove(albumToRemove);
+            // Now you can delete the album from Firestore if needed
+            db.collection("albums")
+                    .whereEqualTo("id", albumId) // Assuming "id" is the field storing the album ID
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                            db.collection("albums")
+                                    .document(documentSnapshot.getId()) // Get the document ID
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // Handle success
+                                        }
+                                    });
+                        }
+                    });
+        }
     }
 
+
     public static void deleteFavoriteSong(Song song) {
-        favoriteSongs.remove(song);
-        db.collection("songs")
-                .whereEqualTo("id", song.getId()) // Assuming "id" is the field storing the song name
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                        db.collection("songs")
-                                .document(documentSnapshot.getId()) // Get the document ID
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        // Handle success
-                                    }
-                                });
-                    }
-                });
+        String songId = song.getId(); // Get the ID from the provided song
+        Song songToRemove = null;
+        for (Song favSong : favoriteSongs) {
+            if (favSong.getId().equals(songId)) {
+                songToRemove = favSong;
+                break; // Found the song, exit the loop
+            }
+        }
+
+        if (songToRemove != null) {
+            favoriteSongs.remove(songToRemove);
+            // Now you can delete the song from Firestore if needed
+            db.collection("songs")
+                    .whereEqualTo("id", songId) // Assuming "id" is the field storing the song ID
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                            db.collection("songs")
+                                    .document(documentSnapshot.getId()) // Get the document ID
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // Handle success
+                                        }
+                                    });
+                        }
+                    });
+        }
     }
 
     public static void downloadFavoritesAlbums() {

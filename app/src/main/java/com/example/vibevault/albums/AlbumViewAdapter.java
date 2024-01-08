@@ -46,6 +46,7 @@ public class AlbumViewAdapter extends RecyclerView.Adapter<AlbumViewHolder>{
         final String id = albumList.get(position).getId();
 
         if(isInFavoritesAlbums(album.getId())) album.setFavourite(true);
+        else album.setFavourite(false);
 
 
         holder.name.setText(albumList.get(position).getName());

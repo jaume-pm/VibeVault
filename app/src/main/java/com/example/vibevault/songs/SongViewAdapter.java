@@ -48,6 +48,7 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewHolder>{
         final String id = song.getId();
 
         if(isInFavoritesSongs(song.getId())) song.setFavourite(true);
+        else song.setFavourite(false);
 
         holder.name.setText(songList.get(position).getName());
         String aux = "";
