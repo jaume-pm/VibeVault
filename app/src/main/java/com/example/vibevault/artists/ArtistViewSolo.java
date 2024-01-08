@@ -1,6 +1,8 @@
 package com.example.vibevault.artists;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteArtist;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesAlbums;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesArtist;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteArtist;
 import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
@@ -32,14 +34,12 @@ public class ArtistViewSolo extends AppCompatActivity {
     private TextView name, followers, genres, popularity;
     private ImageView artistImg, artistBackgroundImg;
     private ImageButton back, addFav;
-    private boolean isFavorite;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_solo_artist);
         String ID = getIntent().getStringExtra("ID");
-        isFavorite = getIntent().getBooleanExtra("isFavorite", false);
         boolean searchingById = getIntent().getBooleanExtra("searchingById", false);
         if (ID == null || ID.isEmpty()) { quit("No hay resultados"); }
         else {
@@ -115,7 +115,7 @@ public class ArtistViewSolo extends AppCompatActivity {
     void setUpArtistsParams (Artist artist){
         try {
             name.setText(artist.getName());
-            artist.setFavourite(isFavorite);
+            artist.setFavourite(isInFavoritesArtist(artist.getId()));
             if (artist.isFavourite())
                 addFav.setImageResource(R.drawable.filledheart_icon);
             else addFav.setImageResource(R.drawable.favorite_icon);

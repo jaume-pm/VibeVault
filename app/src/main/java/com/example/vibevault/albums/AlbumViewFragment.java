@@ -64,7 +64,6 @@ public class AlbumViewFragment extends Fragment implements SelectListener {
         DataHolder.getInstance().setSavedFragment(1);
         Intent intent = new Intent(context, AlbumViewSolo.class);
         intent.putExtra("ID", id);
-        intent.putExtra("isFavorite", isFavorite);
         intent.putExtra("searchingById", true);
         context.startActivity(intent);
     }

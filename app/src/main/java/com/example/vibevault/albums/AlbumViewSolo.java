@@ -1,6 +1,7 @@
 package com.example.vibevault.albums;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteAlbum;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesAlbums;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteAlbum;
 import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
@@ -140,7 +141,6 @@ public class AlbumViewSolo extends AppCompatActivity {
 
     void setUpAlbumParams(Album album){
         try {
-            boolean isFavorite = getIntent().getBooleanExtra("isFavorite", false);
             name.setText(album.getName());
             date.setText(album.getRelease_date());
             total_tracks.setText(String.valueOf(album.getTotal_tracks()));
@@ -155,8 +155,7 @@ public class AlbumViewSolo extends AppCompatActivity {
                 artists = artists + ", " + album.getArtists().get(i).getName();
             }
             artistsTxt.setText(artists);
-
-            album.setFavourite(isFavorite);
+            album.setFavourite(isInFavoritesAlbums(album.getId()));
             if (album.isFavourite())
                 addFav.setImageResource(R.drawable.filledheart_icon);
             else addFav.setImageResource(R.drawable.favorite_icon);

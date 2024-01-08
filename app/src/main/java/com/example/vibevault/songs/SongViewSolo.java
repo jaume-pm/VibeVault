@@ -1,6 +1,8 @@
 package com.example.vibevault.songs;
 
 import static com.example.vibevault.firebase.Favorites.deleteFavoriteSong;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesAlbums;
+import static com.example.vibevault.firebase.Favorites.isInFavoritesSongs;
 import static com.example.vibevault.firebase.Favorites.saveFavoriteSong;
 import static com.example.vibevault.utilities.SpotifyAPI.getAuthToken;
 
@@ -40,14 +42,13 @@ public class SongViewSolo extends AppCompatActivity {
     private ImageButton back, addFav, play;
 
     private MediaPlayer mediaPlayer;
-    private boolean isPlaying = false, isPLayable, isFavorite;
+    private boolean isPlaying = false, isPLayable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_solo_song);
         String ID = getIntent().getStringExtra("ID");
-        isFavorite = getIntent().getBooleanExtra("isFavorite", false);
         boolean searchingById = getIntent().getBooleanExtra("searchingById", false);
         if (ID == null || ID.isEmpty()) { quit("No hay resultados"); }
         else {
@@ -126,7 +127,7 @@ public class SongViewSolo extends AppCompatActivity {
             date.setText(song.getAlbum().getRelease_date());
             String popuString = "Según Spotify, esta canción tiene una valoración de <b>" + song.getPopularity() + "</b> sobre 100, donde 100 representa la máxima popularidad. La popularidad se calcula mediante un algoritmo que considera el número de reproducciones de la canción y lo recientes que són.";
             popularity.setText(Html.fromHtml(popuString));
-            song.setFavourite(isFavorite);
+            song.setFavourite(isInFavoritesSongs(song.getId()));
             if (song.isFavourite())
                 addFav.setImageResource(R.drawable.filledheart_icon);
             else addFav.setImageResource(R.drawable.favorite_icon);
