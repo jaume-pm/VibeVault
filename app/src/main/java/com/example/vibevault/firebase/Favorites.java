@@ -10,16 +10,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Favorites {
 
     //For this class to be work correctly the methods getFavoriteX must be called just once.
     private static final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private static List<Artist> favoriteArtists = new ArrayList<>();
-    private static List<Song> favoriteSongs = new ArrayList<>();
-    private static List<Album> favoriteAlbums = new ArrayList<>();
+    private static Map<String, Artist> favoriteArtists = new HashMap<>();
+    private static Map<String, Song> favoriteSongs = new HashMap<>();
+    private static Map<String, Album> favoriteAlbums = new HashMap<>();
 
     private static boolean is_favoriteArtistsComplete = false;
     private static boolean is_favoriteAlbumsComplete = false;
@@ -27,21 +29,18 @@ public class Favorites {
 
     
     public static boolean isInFavoritesAlbums(String id){
-        return favoriteAlbums.stream()
-                .anyMatch(album -> album.getId().equals(id));
+        return favoriteAlbums.containsKey(id);
     }
 
     public static boolean isInFavoritesArtist(String id){
-        return favoriteArtists.stream()
-                .anyMatch(artist -> artist.getId().equals(id));
+        return favoriteArtists.containsKey(id);
     }
     public static boolean isInFavoritesSongs(String id){
-        return favoriteSongs.stream()
-                .anyMatch(song -> song.getId().equals(id));
+        return favoriteSongs.containsKey(id);
     }
 
     public static void saveFavoriteArtist(Artist artist) {
-        favoriteArtists.add(artist);
+        favoriteArtists.put(artist.getId(), artist);
         db.collection("artists")
                 .add(artist)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -53,7 +52,7 @@ public class Favorites {
     }
 
     public static void saveFavoriteAlbum(Album album) {
-        favoriteAlbums.add(album);
+        favoriteAlbums.put(album.getId(), album);
         db.collection("albums")
                 .add(album)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -65,7 +64,7 @@ public class Favorites {
     }
 
     public static void saveFavoriteSong(Song song) {
-        favoriteSongs.add(song);
+        favoriteSongs.put(song.getId(), song);
         db.collection("songs")
                 .add(song)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -78,16 +77,8 @@ public class Favorites {
 
     public static void deleteFavoriteArtist(Artist artist) {
         String artistId = artist.getId(); // Get the ID from the provided artist
-        Artist artistToRemove = null;
-        for (Artist favArtist : favoriteArtists) {
-            if (favArtist.getId().equals(artistId)) {
-                artistToRemove = favArtist;
-                break; // Found the artist, exit the loop
-            }
-        }
-
-        if (artistToRemove != null) {
-            favoriteArtists.remove(artistToRemove);
+        if (favoriteArtists.containsKey(artistId)) {
+            favoriteArtists.remove(artistId);
             // Now you can delete the artist from Firestore if needed
             db.collection("artists")
                     .whereEqualTo("id", artistId) // Assuming "id" is the field storing the artist ID
@@ -110,17 +101,10 @@ public class Favorites {
     }
 
     public static void deleteFavoriteAlbum(Album album) {
-        String albumId = album.getId(); // Get the ID from the provided album
-        Album albumToRemove = null;
-        for (Album favAlbum : favoriteAlbums) {
-            if (favAlbum.getId().equals(albumId)) {
-                albumToRemove = favAlbum;
-                break; // Found the album, exit the loop
-            }
-        }
+        String albumId = album.getId();
 
-        if (albumToRemove != null) {
-            favoriteAlbums.remove(albumToRemove);
+        if (favoriteAlbums.containsKey(albumId)) {
+            favoriteAlbums.remove(albumId);
             // Now you can delete the album from Firestore if needed
             db.collection("albums")
                     .whereEqualTo("id", albumId) // Assuming "id" is the field storing the album ID
@@ -144,17 +128,10 @@ public class Favorites {
 
 
     public static void deleteFavoriteSong(Song song) {
-        String songId = song.getId(); // Get the ID from the provided song
-        Song songToRemove = null;
-        for (Song favSong : favoriteSongs) {
-            if (favSong.getId().equals(songId)) {
-                songToRemove = favSong;
-                break; // Found the song, exit the loop
-            }
-        }
+        String songId = song.getId();
 
-        if (songToRemove != null) {
-            favoriteSongs.remove(songToRemove);
+        if (favoriteSongs.containsKey(songId)) {
+            favoriteSongs.remove(songId);
             // Now you can delete the song from Firestore if needed
             db.collection("songs")
                     .whereEqualTo("id", songId) // Assuming "id" is the field storing the song ID
@@ -180,10 +157,10 @@ public class Favorites {
         db.collection("albums")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    favoriteAlbums = new ArrayList<>();
+                    favoriteAlbums = new HashMap<>(); // Change from ArrayList to HashMap
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         Album album = document.toObject(Album.class);
-                        favoriteAlbums.add(album);
+                        favoriteAlbums.put(album.getId(), album); // Store the album in the HashMap with the ID as the key
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -192,14 +169,15 @@ public class Favorites {
         is_favoriteAlbumsComplete = true;
     }
 
+
     public static void downloadFavoritesSongs() {
         db.collection("songs")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    favoriteSongs = new ArrayList<>();
+                    favoriteSongs = new HashMap<>(); // Change from ArrayList to HashMap
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         Song song = document.toObject(Song.class);
-                        favoriteSongs.add(song);
+                        favoriteSongs.put(song.getId(), song); // Store the song in the HashMap with the ID as the key
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -212,10 +190,10 @@ public class Favorites {
         db.collection("artists")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    favoriteArtists = new ArrayList<>();
+                    favoriteArtists = new HashMap<>(); // Change from ArrayList to HashMap
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         Artist artist = document.toObject(Artist.class);
-                        favoriteArtists.add(artist);
+                        favoriteArtists.put(artist.getId(), artist); // Store the artist in the HashMap with the ID as the key
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -224,16 +202,17 @@ public class Favorites {
         is_favoriteArtistsComplete = true;
     }
 
+
     public static List<Album> getFavoriteAlbums() {
-        return favoriteAlbums;
+        return new ArrayList<>(favoriteAlbums.values());
     }
 
     public static List<Song> getFavoriteSongs() {
-        return favoriteSongs;
+        return new ArrayList<>(favoriteSongs.values());
     }
 
     public static List<Artist> getFavoriteArtists() {
-        return favoriteArtists;
+        return new ArrayList<>(favoriteArtists.values());
     }
 
     public static boolean isFavoritesDownloaded(){
