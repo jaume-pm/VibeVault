@@ -138,12 +138,11 @@ public class SpotifyAPI {
         List<Song> s = DataHolder.getInstance().getTopSongs();
         Set<String> notSame = new HashSet<>();
         String artistIds = "";
-        for(int i = 0; i < 25; i++){
-            for(Artist a : s.get(i).getArtists()){
-                if (!notSame.contains(a.getId())) {
-                    artistIds = artistIds + "," + a.getId();
-                    notSame.add(a.getId());
-                }
+        for(int i = 0; i < s.size(); i++) {
+            Artist a = s.get(i).getArtists().get(0);
+            if (!notSame.contains(a.getId())) {
+                artistIds = artistIds + "," + a.getId();
+                notSame.add(a.getId());
             }
         }
         artistIds = artistIds.substring(1);
