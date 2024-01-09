@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="vibeVault_dark_blue">#3D50A6</color>
+    <color name="vibeVault_blue">#FF5271FF</color>
+    <color name="vibeVault_dark_grey">#FF121212</color>
+    <color name="vibeVault_light_dark_grey">#1C1C1C</color>
+    <color name="vibeVault_grey">#292929</color>
+    <color name="vibeVault_ripple_grey">#535353</color>
+    <color name="vibeVault_light_grey">#6d7575</color>
 </resources>

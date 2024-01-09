@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370729022475",
+    "project_id": "vibe-vault-44acb",
+    "storage_bucket": "vibe-vault-44acb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370729022475:android:c8b5f8b6659587f06d430e",
+        "android_client_info": {
+          "package_name": "com.example.vibevault"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1azfg83F43UkERMdGHryqdnCa50iKJrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
